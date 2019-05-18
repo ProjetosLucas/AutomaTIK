@@ -91,7 +91,7 @@ Para:
 
 
 
-13- Agora com o Navegador (GoogleChrome, Mozilla,...) e escreva: localhost/AutomTIK/
+13- Agora com o Navegador (GoogleChrome, Mozilla,...) e escreva: localhost/AutomaTIK/
 
 14- Assim o navegador irá mostrar o Projeto baixado pelo git clone. Lembrando que esse projeto está salvo em: C:\xampp\htdocs\AutomaTIK. Para ter acesso a partes que são recusadas, faça o login com username 'admin' e a senha 'admin'. No caso do username 'moderador' e a senha é 'modorador'. Outros usuários as senhas são 123456.
 
