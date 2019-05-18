@@ -30,6 +30,7 @@
             echo $this->Form->control('sector_id', ['options' => $sectors]);
             echo $this->Form->control('fone');
             echo $this->Form->control('name');
+            echo $this->Form->control('email');
             echo $this->Form->control('registration');
         ?>
     </fieldset>

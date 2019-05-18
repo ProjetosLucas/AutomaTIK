@@ -38,6 +38,7 @@
                 <th scope="col"><?= __('Sector Id') ?></th>
                 <th scope="col"><?= __('Fone') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
+                <th scope="col"><?= __('Email') ?></th>
                 <th scope="col"><?= __('Registration') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -49,6 +50,7 @@
                 <td><?= h($students->sector_id) ?></td>
                 <td><?= h($students->fone) ?></td>
                 <td><?= h($students->name) ?></td>
+                <td><?= h($students->email) ?></td>
                 <td><?= h($students->registration) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Students', 'action' => 'view', $students->id]) ?>

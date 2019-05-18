@@ -49,10 +49,10 @@ class LoanFixture extends TestFixture
                 'id' => 1,
                 'student_id' => 1,
                 'equipament_id' => 1,
-                'created' => '2019-05-18 19:44:00',
-                'modified' => '2019-05-18 19:44:00',
-                'scheduled_devolution' => '2019-05-18 19:44:00',
-                'real_devolution' => '2019-05-18 19:44:00'
+                'created' => '2019-05-18 21:44:57',
+                'modified' => '2019-05-18 21:44:57',
+                'scheduled_devolution' => '2019-05-18 21:44:57',
+                'real_devolution' => '2019-05-18 21:44:57'
             ],
         ];
         parent::init();

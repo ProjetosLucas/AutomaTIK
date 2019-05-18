@@ -25,6 +25,7 @@
                 <th scope="col"><?= $this->Paginator->sort('sector_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('fone') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('registration') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -38,6 +39,7 @@
                 <td><?= $student->has('sector') ? $this->Html->link($student->sector->name, ['controller' => 'Sectors', 'action' => 'view', $student->sector->id]) : '' ?></td>
                 <td><?= h($student->fone) ?></td>
                 <td><?= h($student->name) ?></td>
+                <td><?= h($student->email) ?></td>
                 <td><?= h($student->registration) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $student->id]) ?>

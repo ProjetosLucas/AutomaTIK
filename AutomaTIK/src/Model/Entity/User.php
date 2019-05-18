@@ -4,21 +4,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Student Entity
+ * User Entity
  *
  * @property int $id
- * @property string $code
- * @property string $cpf
- * @property int $sector_id
- * @property string $fone
  * @property string $name
+ * @property string $usermame
  * @property string $email
- * @property string $registration
+ * @property string $password
+ * @property int $roles_id
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Sector $sector
- * @property \App\Model\Entity\Loan[] $loan
+ * @property \App\Model\Entity\Role $role
  */
-class Student extends Entity
+class User extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -30,14 +29,22 @@ class Student extends Entity
      * @var array
      */
     protected $_accessible = [
-        'code' => true,
-        'cpf' => true,
-        'sector_id' => true,
-        'fone' => true,
         'name' => true,
+        'usermame' => true,
         'email' => true,
-        'registration' => true,
-        'sector' => true,
-        'loan' => true
+        'password' => true,
+        'roles_id' => true,
+        'created' => true,
+        'modified' => true,
+        'role' => true
+    ];
+
+    /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array
+     */
+    protected $_hidden = [
+        'password'
     ];
 }

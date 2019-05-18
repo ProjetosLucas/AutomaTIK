@@ -41,6 +41,10 @@
             <td><?= h($student->name) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Email') ?></th>
+            <td><?= h($student->email) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Registration') ?></th>
             <td><?= h($student->registration) ?></td>
         </tr>

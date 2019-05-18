@@ -83,6 +83,11 @@ class StudentsTable extends Table
             ->allowEmptyString('name', false);
 
         $validator
+            ->email('email')
+            ->requirePresence('email', 'create')
+            ->allowEmptyString('email', false);
+
+        $validator
             ->scalar('registration')
             ->maxLength('registration', 100)
             ->requirePresence('registration', 'create')
@@ -100,6 +105,7 @@ class StudentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['sector_id'], 'Sectors'));
 
         return $rules;
