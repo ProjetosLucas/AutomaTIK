@@ -1,2 +1,120 @@
-# AutomaTIK
-O projeto em desenvolvimento para a disciplina de Projeto Orientado tem como objetivo a resolução de alguma problemática cotidiana por vias de Internet das coisas (do inglês, Internet of Things - IoT)[1][3]. Tomando como base a ideia acordada pelo professor e alunos da disciplina, o grupo propôs desenvolver um projeto que apresente melhorias em economia de tempo e trabalho humano dos laboratórios de eletrônica do prédio do CT II. Tais laboratórios são constantemente utilizados e, dessa forma, o grupo se propôs a pensar em uma solução e executá-la de forma que auxilie o processo de gerenciamento de KITs dos laboratórios, ajudando tanto alunos e professores como os próprios funcionários do local. A ideia tem aplicabilidade em diversas instâncias, para tanto, tal ideia foi generalizada para gerenciamento de KITs, de forma a atender outras áreas e não somente os laboratórios do CT II. 
+﻿# -Automatik
+Projeto de Automãção de empréstimos de Kits dos Laboratórios de Engenharia Elétrica da Ufes.
+
+Segue os passos para colocar no seu computador 
+
+1- Instala o aio-runtimes_v2.4.7.exe, que é programa que instala todos os pacotes qeu faltam do Windows, que são nescessárias para o Xampp funcionar. O instalador pode ser encontrado no seguinte site: http://www.pcgameshardware.de/Windows-Software-122001/Downloads/All-in-One-Runtimes-Download-1164729/
+
+2- Instala se quiser o Sublime Text Build, que é um editor de texto. Ele se encontra no seguinte site: https://www.sublimetext.com/3.
+
+3- Instala o Git. Ele se encontra no seguinte site: https://git-scm.com/downloads
+
+4- Instala o Xampp que está no seguinte site : https://www.apachefriends.org/xampp-files/7.3.1/xampp-win32-7.3.1-0-VC15-installer.exe.
+
+5- Abra o arquivo C:\xampp\php\php.ini e altera a linha ';extension=php_intl.dll' ou ';extension=intl'  para 'extension=php_intl.dll' ou 'extension=intl' (remover o ponto e vírgula) e salva o arquivo. Copie todos os arquivos /xamp/php/ic*.dll para /xampp/apache/bin.
+
+6- Instala o Composer (Pode achar o instalador olhe o seguinte site https://getcomposer.org/Composer-Setup.exe). OBSERVAÇÃO: Na aba Settings Check, quando ele pede "Choose the Command-Line PHP you want to use:" escolha a opção C:\xamppp\php\php.exe.
+
+7- Abra o Git e escreva o seguinte comando: 
+
+	git clone https://github.com/ProjetosLucas/AutomaTIK.git C:\xampp\htdocs\AutomaTIK
+
+8- No prompt escreva os seguintes comandos:
+ 
+	cd C:\xampp\htdocs\AutomaTIK\AutomaTIK
+	composer install
+	composer upgrade 
+
+9- Abra o Xampp (Xampp Control Panel) e aperte "Start" para todos os módulos, para inicializar todos os seus serviços.
+
+10- Depois de ter inicializados os serviços do Xampp, abra um Navegador (GoogleChrome, Mozilla,...) e escreva: localhost/phpmyadmin/
+
+11-Aperta no canto esquerdo da tela "New" e em "Criar base de Dados" escreva "project"
+
+12-Depois vai na aba importar e aperte "Escolher Arquivo" e escolha o seguinte arquivo: C:\xampp\htdocs\AutomaTIK\project.sql. Depois aperte em "Executar".
+
+13-No arquivo C:\xampp\htdocs\AutomaTIK\AutomaTIK\config\app.php, faça a seguinte alteração da seguinte parte do código:
+
+	'Datasources' => [
+		'default' => [
+	            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+	            'persistent' => false,
+            'host' => 'localhost',
+	            /*
+             * CakePHP will use the default DB port based on the driver selected
+             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
+	             * the following line and set the port accordingly
+             */
+            //'port' => 'non_standard_port_number',
+	            'username' => 'my_app',
+            'password' => 'secret',
+            'database' => 'my_app',
+			/*
+			* You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
+        			*/
+			//'encoding' => 'utf8mb4',
+               'timezone' => 'UTC',
+			'flags' => [],
+	            'cacheMetadata' => true,	
+            'log' => false,
+
+
+Para:
+
+
+	'Datasources' => [
+		'default' => [
+	            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+	            'persistent' => false,
+            'host' => 'localhost',
+	            /*
+             * CakePHP will use the default DB port based on the driver selected
+             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
+	             * the following line and set the port accordingly
+             */
+            //'port' => 'non_standard_port_number',
+	            'username' => 'root',
+            'password' => '',
+	            'database' => 'project',
+            	    /*
+			* You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
+        			*/
+			//'encoding' => 'utf8mb4',
+               'timezone' => 'UTC',
+			'flags' => [],
+	            'cacheMetadata' => true,
+            'log' => false,
+
+
+
+
+
+13- Agora com o Navegador (GoogleChrome, Mozilla,...) e escreva: localhost/AutomTIK/
+
+14- Assim o navegador irá mostrar o Projeto baixado pelo git clone. Lembrando que esse projeto está salvo em: C:\xampp\htdocs\AutomaTIK. Para ter acesso a partes que são recusadas, faça o login com username 'admin' e a senha 'admin'. No caso do username 'moderador' e a senha é 'modorador'. Outros usuários as senhas são 123456.
+
+15- Clica na pasta projeto para ver o site.
+
+16- ATENÇÃO: Antes de começa a fazer a alteração no código faça o seguinte, onde você coloca o seu e-mail no "you@example.com", o seu nome em "Your Name".
+	
+	git config --global user.email "you@example.com"
+	git config --global user.name "Your Name"
+	cd C:\xampp\htdocs\AutomaTIK
+	git pull
+
+Caso perceba que ocorreu alguma mudança no arquivo project.sql (É dito na tela preta do git), faça a atualização do banco de dados do seu computador: abra o Navegador (GoogleChrome, Mozilla,...) e  escreva: localhost/phpmyadmin/, e vai em cima da tela e aperta Base de Dados, depois seleciona "project" e aperta "Elimina" e depois em "OK". Logo, no canto esquerdo da tela  aperta em "New" e em "Criar base de Dados" escreva "project". Depois vai na aba importar e aperte "Escolher Arquivo", escolha o seguinte arquivo: C:\xampp\htdocs\AutomaTIK\project.sql e depois aperta em "Executar". 
+
+17 - Eu baxei um site que utiliza DHTML JavaScript para desenhar sobre as figuras. Para olhar o site escreva no Browser: 'http://localhost/AutomaTIK/Drawing/www.walterzorn.de/jsgraphics/jsgraphics.htm'. Vamos dar uma olhada depois como que colocamos esse projeto junto com o projeto do site atual.
+
+18 - Qualquer modificação você deve fazer o seguinte, abrir o git e fazer os seguintes comandos, onde você coloca o seu e-mail no "you@example.com", o seu nome em "Your Name" e algum comentário em  "Algum Comentario":
+	
+	git config --global user.email "you@example.com"
+	git config --global user.name "Your Name"
+	cd C:\xampp\htdocs\AutomaTIK
+	git add .
+	git commit -m "Algum Comentario"
+	git push
+
+Onde irá atualizar o código do github. Atualiza sempre o beckup do banco de dados que está presente no arquivo C:\xampp\htdocs\AutomaTIK\project.sql. Para fazer o beckup é só digitar localhost/phpmyadmin/ no navegador, apertar no Menu do lado esquerdo em "project", aperta depois em "exportar" e depois em executar. O arquivo que foi feito o download sobreescreve sobre o arquivo C:\xampp\htdocs\AutomaTIK\project.sql.
