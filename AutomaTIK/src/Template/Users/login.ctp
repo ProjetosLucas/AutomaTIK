@@ -25,16 +25,12 @@
         <?php endif; ?>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create() ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
+        <legend><?= __('Login') ?></legend>
         <?php
-            echo $this->Form->control('name');
             echo $this->Form->control('username');
-            echo $this->Form->control('email');
             echo $this->Form->control('password');
-            echo $this->Form->control('confirm_password',['type'=>'password']);
-            echo $this->Form->hidden('roles_id', ['value'=>2]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -21,7 +21,7 @@ class LoanFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'student_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'equipament_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
@@ -49,10 +49,10 @@ class LoanFixture extends TestFixture
                 'id' => 1,
                 'student_id' => 1,
                 'equipament_id' => 1,
-                'created' => '2019-05-18 21:44:57',
-                'modified' => '2019-05-18 21:44:57',
-                'scheduled_devolution' => '2019-05-18 21:44:57',
-                'real_devolution' => '2019-05-18 21:44:57'
+                'created' => '2019-05-19 01:11:46',
+                'modified' => '2019-05-19 01:11:46',
+                'scheduled_devolution' => '2019-05-19 01:11:46',
+                'real_devolution' => '2019-05-19 01:11:46'
             ],
         ];
         parent::init();

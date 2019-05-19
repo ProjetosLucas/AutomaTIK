@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * Equipament Entity
  *
  * @property int $id
+ * @property string $name
  * @property string $code
  * @property string $description
  * @property bool $in_stock
@@ -25,6 +26,7 @@ class Equipament extends Entity
      * @var array
      */
     protected $_accessible = [
+        'name' => true,
         'code' => true,
         'description' => true,
         'in_stock' => true,

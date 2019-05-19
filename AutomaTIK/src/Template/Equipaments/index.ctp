@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('code') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('in_stock') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -27,6 +28,7 @@
             <?php foreach ($equipaments as $equipament): ?>
             <tr>
                 <td><?= $this->Number->format($equipament->id) ?></td>
+                <td><?= h($equipament->name) ?></td>
                 <td><?= h($equipament->code) ?></td>
                 <td><?= h($equipament->in_stock) ?></td>
                 <td class="actions">

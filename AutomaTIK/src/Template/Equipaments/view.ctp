@@ -19,6 +19,10 @@
     <h3><?= h($equipament->id) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th scope="row"><?= __('Name') ?></th>
+            <td><?= h($equipament->name) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Code') ?></th>
             <td><?= h($equipament->code) ?></td>
         </tr>

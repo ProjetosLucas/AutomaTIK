@@ -17,6 +17,7 @@
     <fieldset>
         <legend><?= __('Add Equipament') ?></legend>
         <?php
+            echo $this->Form->control('name');
             echo $this->Form->control('code');
             echo $this->Form->control('description');
             echo $this->Form->control('in_stock');

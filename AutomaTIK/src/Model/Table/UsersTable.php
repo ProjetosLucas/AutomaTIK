@@ -10,12 +10,13 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsTo $Roles
+ * @property \App\Model\Table\DiseasesTable|\Cake\ORM\Association\HasMany $Diseases
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\User|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\User saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
@@ -24,6 +25,7 @@ use Cake\Validation\Validator;
  */
 class UsersTable extends Table
 {
+
     /**
      * Initialize method
      *
@@ -44,6 +46,9 @@ class UsersTable extends Table
             'foreignKey' => 'roles_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Diseases', [
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     /**
@@ -56,36 +61,41 @@ class UsersTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', 'create');
+            ->allowEmpty('id', 'create');
 
         $validator
             ->scalar('name')
-            ->maxLength('name', 255)
+            ->maxLength('name', 500)
             ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
+            ->notEmpty('name');
 
         $validator
-            ->scalar('usermame')
-            ->maxLength('usermame', 20)
-            ->requirePresence('usermame', 'create')
-            ->allowEmptyString('usermame', false);
+            ->scalar('username')
+            ->maxLength('username', 20)
+            ->requirePresence('username', 'create')
+            ->notEmpty('username');
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->allowEmptyString('email', false);
+            ->notEmpty('email');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->allowEmptyString('password', false);
+            ->notEmpty('password');
 
         $validator
-            ->add('confirm_password', 
-                'compareWith', [
-                'rule'=> ['compareWith', 'password'], 'message' => 'Passwords not equal']);
-            
+            ->add(
+                'confirm_password',
+                'compareWith',[
+                    'rule' => ['compareWith', 'password'],
+                    'message' => 'Passwords not equal.'
+                ]
+
+            );
+
         return $validator;
     }
 
@@ -98,6 +108,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['roles_id'], 'Roles'));
 

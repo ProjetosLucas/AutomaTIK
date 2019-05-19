@@ -34,7 +34,7 @@
             <tr>
                 <td><?= $this->Number->format($loan->id) ?></td>
                 <td><?= $loan->has('student') ? $this->Html->link($loan->student->name, ['controller' => 'Students', 'action' => 'view', $loan->student->id]) : '' ?></td>
-                <td><?= $loan->has('equipament') ? $this->Html->link($loan->equipament->id, ['controller' => 'Equipaments', 'action' => 'view', $loan->equipament->id]) : '' ?></td>
+                <td><?= $loan->has('equipament') ? $this->Html->link($loan->equipament->name, ['controller' => 'Equipaments', 'action' => 'view', $loan->equipament->id]) : '' ?></td>
                 <td><?= h($loan->created) ?></td>
                 <td><?= h($loan->modified) ?></td>
                 <td><?= h($loan->scheduled_devolution) ?></td>

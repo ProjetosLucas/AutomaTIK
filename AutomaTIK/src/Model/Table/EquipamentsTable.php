@@ -33,7 +33,7 @@ class EquipamentsTable extends Table
         parent::initialize($config);
 
         $this->setTable('equipaments');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Loan', [
@@ -52,6 +52,12 @@ class EquipamentsTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', 'create');
+
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 255)
+            ->requirePresence('name', 'create')
+            ->allowEmptyString('name', false);
 
         $validator
             ->scalar('code')
