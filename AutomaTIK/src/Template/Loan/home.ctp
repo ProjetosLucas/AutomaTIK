@@ -200,18 +200,24 @@
             </tr>
         </thead>
         <tbody>
+            <?php foreach ($emprestados2 as $emprestado2): ?>
             <?php foreach ($equipaments as $equipament): ?>
-            <tr>
-                <td><?= $this->Number->format($equipament->id) ?></td>
-                <td><?= h($equipament->name) ?></td>
-                <td><?= h($equipament->code) ?></td>
-                <td><?= h($equipament->in_stock) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $equipament->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $equipament->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)]) ?>
-                </td>
-            </tr>
+            <?php
+            if(!(($equipament->id)==($emprestado2->equipament_id))){
+                 echo "<tr>
+                    <td>".$this->Number->format($equipament->id)."</td>
+                    <td>".($equipament->name)."</td>
+                    <td>".($equipament->code)."</td>
+                    <td>".($equipament->in_stock)."</td>
+                    <td class='actions'>
+                        ".$this->Html->link(__('View'), ['action' => 'view', $equipament->id])."
+                        ".$this->Html->link(__('Edit'), ['action' => 'edit', $equipament->id])."
+                        ".$this->Form->postLink(__('Delete'), ['action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)])."
+                    </td>
+                </tr>" ;
+            }
+            ?>
+            <?php endforeach; ?>
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -9,18 +9,21 @@
         <ul class="side-nav">
             <li class="heading"><?= __('Actions') ?></li>
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Home'), ['controller' => 'Loan', 'action' => 'home']) ?></li>
         </ul>
         <?php endif; ?>
         <?php if ($username_role===2): ?>
         <ul class="side-nav">
             <li class="heading"><?= __('User Actions') ?></li>
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Home'), ['controller' => 'Loan', 'action' => 'home']) ?></li>
         </ul>
         <?php endif; ?>
         <?php if ($username_role===1): ?>
         <ul class="side-nav">
             <li class="heading"><?= __('Admin Actions') ?></li>
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Home'), ['controller' => 'Loan', 'action' => 'home']) ?></li>
         </ul>
         <?php endif; ?>
 </nav>

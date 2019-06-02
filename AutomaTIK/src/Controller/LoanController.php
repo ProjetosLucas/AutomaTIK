@@ -38,6 +38,7 @@ class LoanController extends AppController
         $atrasados=$this->Loan->find('all')->where(['Loan.scheduled_devolution <' => $time->format('Y-m-d H:i:s')])->toArray();
         //debug($atrasados);
         $emprestados = $this->Loan->find('all')->where(['Loan.real_borrow <'=> $time->format('Y-m-d H:i:s'),'Loan.scheduled_devolution >'=> $time->format('Y-m-d H:i:s')])->toArray();
+        $emprestados2 = $this->Loan->find('all')->where(['Loan.real_borrow <'=> $time->format('Y-m-d H:i:s'),'Loan.scheduled_devolution >'=> $time->format('Y-m-d H:i:s')])->toArray();
         $time2 = Time::now();
         $time2->modify('+2 hours');
         $prox_emprestimos=$this->Loan->find('all')->where(['Loan.scheduled_borrow <'=> $time2->format('Y-m-d H:i:s'),'Loan.scheduled_borrow >'=> $time->format('Y-m-d H:i:s')])->toArray();
@@ -47,6 +48,7 @@ class LoanController extends AppController
         $this->set('equipaments', $equipaments);
         $this->set('atrasados', $atrasados);
         $this->set('emprestados', $emprestados);
+        $this->set('emprestados2', $emprestados2);
         $this->set('prox_emprestimos', $prox_emprestimos);
         $this->set('students', $students);
         $this->set('equipaments1', $equipaments1);
