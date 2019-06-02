@@ -65,13 +65,19 @@ class LoanTable extends Table
 
         $validator
             ->dateTime('scheduled_devolution')
-            ->requirePresence('scheduled_devolution', 'create')
-            ->allowEmptyDateTime('scheduled_devolution', false);
+            ->allowEmptyDateTime('scheduled_devolution');
 
         $validator
             ->dateTime('real_devolution')
-            ->requirePresence('real_devolution', 'create')
-            ->allowEmptyDateTime('real_devolution', false);
+            ->allowEmptyDateTime('real_devolution');
+
+        $validator
+            ->dateTime('real_borrow')
+            ->allowEmptyDateTime('real_borrow');
+
+        $validator
+            ->dateTime('scheduled_borrow')
+            ->allowEmptyDateTime('scheduled_borrow');
 
         return $validator;
     }

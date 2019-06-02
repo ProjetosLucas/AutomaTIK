@@ -65,6 +65,8 @@
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col"><?= __('Scheduled Devolution') ?></th>
                 <th scope="col"><?= __('Real Devolution') ?></th>
+                <th scope="col"><?= __('Real Borrow') ?></th>
+                <th scope="col"><?= __('Scheduled Borrow') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($student->loan as $loan): ?>
@@ -76,6 +78,8 @@
                 <td><?= h($loan->modified) ?></td>
                 <td><?= h($loan->scheduled_devolution) ?></td>
                 <td><?= h($loan->real_devolution) ?></td>
+                <td><?= h($loan->real_borrow) ?></td>
+                <td><?= h($loan->scheduled_borrow) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Loan', 'action' => 'view', $loan->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Loan', 'action' => 'edit', $loan->id]) ?>

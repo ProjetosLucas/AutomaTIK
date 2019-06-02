@@ -16,7 +16,7 @@
     </ul>
 </nav>
 <div class="equipaments view large-9 medium-8 columns content">
-    <h3><?= h($equipament->id) ?></h3>
+    <h3><?= h($equipament->name) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Name') ?></th>
@@ -51,6 +51,8 @@
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col"><?= __('Scheduled Devolution') ?></th>
                 <th scope="col"><?= __('Real Devolution') ?></th>
+                <th scope="col"><?= __('Real Borrow') ?></th>
+                <th scope="col"><?= __('Scheduled Borrow') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($equipament->loan as $loan): ?>
@@ -62,6 +64,8 @@
                 <td><?= h($loan->modified) ?></td>
                 <td><?= h($loan->scheduled_devolution) ?></td>
                 <td><?= h($loan->real_devolution) ?></td>
+                <td><?= h($loan->real_borrow) ?></td>
+                <td><?= h($loan->scheduled_borrow) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Loan', 'action' => 'view', $loan->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Loan', 'action' => 'edit', $loan->id]) ?>

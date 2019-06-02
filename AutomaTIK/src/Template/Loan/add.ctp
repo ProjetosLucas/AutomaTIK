@@ -21,8 +21,10 @@
         <?php
             echo $this->Form->control('student_id', ['options' => $students]);
             echo $this->Form->control('equipament_id', ['options' => $equipaments]);
-            echo $this->Form->control('scheduled_devolution');
-            echo $this->Form->control('real_devolution');
+            echo $this->Form->control('scheduled_devolution', ['empty' => true]);
+            echo $this->Form->control('real_devolution', ['empty' => true]);
+            echo $this->Form->control('real_borrow', ['empty' => true]);
+            echo $this->Form->control('scheduled_borrow', ['empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

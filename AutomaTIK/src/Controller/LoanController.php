@@ -2,6 +2,10 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
+
 
 /**
  * Loan Controller
@@ -17,6 +21,39 @@ class LoanController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+
+     public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow('home');
+    }
+
+    public function home()
+    {
+        $this->paginate = [
+            'contain' => ['Students', 'Equipaments']
+        ];
+        $time = Time::now();
+        $atrasados=$this->Loan->find('all')->where(['Loan.scheduled_devolution <' => $time], ['Loan.real_devolution ='=> ''])->toArray();
+        $emprestados = $this->Loan->find('all')->where(['Loan.real_borrow <'=> $time],['Loan.scheduled_devolution >'=> $time],['Loan.real_devolution ='=> ''])->toArray();
+        $time2 = Time::now();
+        $time2->modify('+2 hours');
+        $prox_emprestimos=$this->Loan->find('all')->where(['Loan.scheduled_borrow <'=> $time2],['Loan.scheduled_borrow >'=> $time])->toArray();
+
+        $loan = $this->paginate($this->Loan);
+        $equipaments=$this->loadModel('Equipaments');
+        $equipaments=$equipaments->find('all')->toArray();
+        
+        $this->set('loan', $loan);
+        $this->set('equipaments', $equipaments);
+        $this->set('atrasados', $atrasados);
+        $this->set('emprestados', $emprestados);
+        $this->set('prox_emprestimos', $prox_emprestimos);
+        $this->set('loan', $loan);
+        
+
+    }
+
     public function index()
     {
         $this->paginate = [

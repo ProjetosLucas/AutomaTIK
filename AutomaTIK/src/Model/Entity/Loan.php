@@ -11,8 +11,10 @@ use Cake\ORM\Entity;
  * @property int $equipament_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property \Cake\I18n\FrozenTime $scheduled_devolution
- * @property \Cake\I18n\FrozenTime $real_devolution
+ * @property \Cake\I18n\FrozenTime|null $scheduled_devolution
+ * @property \Cake\I18n\FrozenTime|null $real_devolution
+ * @property \Cake\I18n\FrozenTime|null $real_borrow
+ * @property \Cake\I18n\FrozenTime|null $scheduled_borrow
  *
  * @property \App\Model\Entity\Student $student
  * @property \App\Model\Entity\Equipament $equipament
@@ -35,6 +37,8 @@ class Loan extends Entity
         'modified' => true,
         'scheduled_devolution' => true,
         'real_devolution' => true,
+        'real_borrow' => true,
+        'scheduled_borrow' => true,
         'student' => true,
         'equipament' => true
     ];

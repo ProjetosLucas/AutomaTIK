@@ -5,14 +5,27 @@
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Loan'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Students'), ['controller' => 'Students', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Student'), ['controller' => 'Students', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Equipaments'), ['controller' => 'Equipaments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Equipament'), ['controller' => 'Equipaments', 'action' => 'add']) ?></li>
-    </ul>
+        <?php if (!$username): ?>
+        <ul class="side-nav">
+            <li class="heading"><?= __('Actions') ?></li>
+            <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+        </ul>
+        <?php endif; ?>
+        <?php if ($username_role===2): ?>
+        <ul class="side-nav">
+            <li class="heading"><?= __('User Actions') ?></li>
+            <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+        </ul>
+        <?php endif; ?>
+        <?php if ($username_role===1): ?>
+        <ul class="side-nav">
+            <li class="heading"><?= __('Admin Actions') ?></li>
+            <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+        </ul>
+        <?php endif; ?>
 </nav>
 <div class="loan index large-9 medium-8 columns content">
     <h3><?= __('Loan') ?></h3>
@@ -62,4 +75,32 @@
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
+    <h3><?= __('Equipaments') ?></h3>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('code') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('in_stock') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($equipaments as $equipament): ?>
+            <tr>
+                <td><?= $this->Number->format($equipament->id) ?></td>
+                <td><?= h($equipament->name) ?></td>
+                <td><?= h($equipament->code) ?></td>
+                <td><?= h($equipament->in_stock) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $equipament->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $equipament->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
 </div>

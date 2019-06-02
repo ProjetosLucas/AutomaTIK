@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Equipament') ?></th>
-            <td><?= $loan->has('equipament') ? $this->Html->link($loan->equipament->id, ['controller' => 'Equipaments', 'action' => 'view', $loan->equipament->id]) : '' ?></td>
+            <td><?= $loan->has('equipament') ? $this->Html->link($loan->equipament->name, ['controller' => 'Equipaments', 'action' => 'view', $loan->equipament->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
@@ -47,6 +47,14 @@
         <tr>
             <th scope="row"><?= __('Real Devolution') ?></th>
             <td><?= h($loan->real_devolution) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Real Borrow') ?></th>
+            <td><?= h($loan->real_borrow) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Scheduled Borrow') ?></th>
+            <td><?= h($loan->scheduled_borrow) ?></td>
         </tr>
     </table>
 </div>
