@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Students Model
  *
  * @property \App\Model\Table\SectorsTable|\Cake\ORM\Association\BelongsTo $Sectors
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\LoanTable|\Cake\ORM\Association\HasMany $Loan
  *
  * @method \App\Model\Entity\Student get($primaryKey, $options = [])
@@ -39,6 +40,10 @@ class StudentsTable extends Table
 
         $this->belongsTo('Sectors', [
             'foreignKey' => 'sector_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Loan', [
@@ -107,6 +112,7 @@ class StudentsTable extends Table
     {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['sector_id'], 'Sectors'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

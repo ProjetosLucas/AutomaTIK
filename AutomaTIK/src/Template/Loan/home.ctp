@@ -11,6 +11,7 @@
             <li class="heading"><?= __('Actions') ?></li>
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+            <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
         </ul>
         <?php endif; ?>
         <?php if ($username_role===2): ?>
@@ -18,6 +19,7 @@
             <li class="heading"><?= __('User Actions') ?></li>
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+            <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
         </ul>
         <?php endif; ?>
         <?php if ($username_role===1): ?>
@@ -25,6 +27,7 @@
             <li class="heading"><?= __('Admin Actions') ?></li>
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+            <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
         </ul>
         <?php endif; ?>
 </nav>

@@ -13,7 +13,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'Projeto do Hucan';
+$cakeDescription = 'AutomaTIK';
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +48,7 @@ $cakeDescription = 'Projeto do Hucan';
                 <li><?= $this->Html->link(__('Logout'),['controller'=>'Users','action'=>'logout']) ?></li>
                  <li><?= $this->Html->link(__($username),['controller' => 'Users', 'action' => 'view',$username_id])  ?></li>
                  <?php endif; ?>
-                 <li><?= $this->Html->link(__('Projeto AutomaTIK'),['controller'=>'Diseases','action'=>'articles']) ?></li>
+                 <li><?= $this->Html->link(__('Projeto AutomaTIK'),['controller'=>'Loan','action'=>'home']) ?></li>
             </ul>
         </div>
     </nav>

@@ -20,7 +20,7 @@ class StudentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Sectors']
+            'contain' => ['Sectors', 'Users']
         ];
         $students = $this->paginate($this->Students);
 
@@ -37,7 +37,7 @@ class StudentsController extends AppController
     public function view($id = null)
     {
         $student = $this->Students->get($id, [
-            'contain' => ['Sectors', 'Loan']
+            'contain' => ['Sectors', 'Users', 'Loan']
         ]);
 
         $this->set('student', $student);
@@ -61,7 +61,8 @@ class StudentsController extends AppController
             $this->Flash->error(__('The student could not be saved. Please, try again.'));
         }
         $sectors = $this->Students->Sectors->find('list', ['limit' => 200]);
-        $this->set(compact('student', 'sectors'));
+        $users = $this->Students->Users->find('list', ['limit' => 200]);
+        $this->set(compact('student', 'sectors', 'users'));
     }
 
     /**
@@ -86,7 +87,8 @@ class StudentsController extends AppController
             $this->Flash->error(__('The student could not be saved. Please, try again.'));
         }
         $sectors = $this->Students->Sectors->find('list', ['limit' => 200]);
-        $this->set(compact('student', 'sectors'));
+        $users = $this->Students->Users->find('list', ['limit' => 200]);
+        $this->set(compact('student', 'sectors', 'users'));
     }
 
     /**
