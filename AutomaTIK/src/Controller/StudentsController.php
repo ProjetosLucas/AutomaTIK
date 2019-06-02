@@ -43,6 +43,24 @@ class StudentsController extends AppController
         $this->set('student', $student);
     }
 
+    public function myloans()
+    {
+         $username_id = $this->Auth->user('id');
+        $students2=$this->loadModel('Students');
+        $students2=$students2->find('all')->toArray();
+        foreach ($students2 as $student2):
+                if((($username_id)==($student2->user_id))){
+                  $id=$student2->id;
+                }
+        endforeach;
+        
+        $student = $this->Students->get($id, [
+            'contain' => ['Sectors', 'Users', 'Loan']
+        ]);
+
+        $this->set('student', $student);
+    }
+
     /**
      * Add method
      *
