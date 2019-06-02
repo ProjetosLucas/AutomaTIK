@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Loan[]|\Cake\Collection\CollectionInterface $loan
  */
+    use Cake\I18n\Time;
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
         <?php if (!$username): ?>
@@ -28,7 +29,7 @@
         <?php endif; ?>
 </nav>
 <div class="loan index large-9 medium-8 columns content">
-    <h3><?= __('Loan') ?></h3>
+    <h3><?= __('Atrasados') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -45,17 +46,31 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($loan as $loan): ?>
+            <?php foreach ($atrasados as $loan): ?>
             <tr>
                 <td><?= $this->Number->format($loan->id) ?></td>
-                <td><?= $loan->has('student') ? $this->Html->link($loan->student->name, ['controller' => 'Students', 'action' => 'view', $loan->student->id]) : '' ?></td>
-                <td><?= $loan->has('equipament') ? $this->Html->link($loan->equipament->name, ['controller' => 'Equipaments', 'action' => 'view', $loan->equipament->id]) : '' ?></td>
-                <td><?= h($loan->created) ?></td>
-                <td><?= h($loan->modified) ?></td>
-                <td><?= h($loan->scheduled_devolution) ?></td>
-                <td><?= h($loan->real_devolution) ?></td>
-                <td><?= h($loan->real_borrow) ?></td>
-                <td><?= h($loan->scheduled_borrow) ?></td>
+                <td><?= $students->get($loan->student_id)->name  ?></td>
+                <td><?= $equipaments1->get($loan->equipament_id)->name ?></td>
+                <td><?php if(!(is_null($loan->created))){
+                                $time = new Time($loan->created);
+                                echo $time->format('d-m-Y H:i:s');  
+                            }
+                          ?></td>
+                <td><?php if(!(is_null($loan->modified))){
+                          $time = new Time($loan->modified);
+                          echo $time->format('d-m-Y H:i:s'); } ?></td>
+                <td><?php if(!(is_null($loan->scheduled_devolution))){
+                          $time = new Time($loan->scheduled_devolution);
+                          echo $time->format('d-m-Y H:i:s'); } ?></td>
+                <td><?php if(!(is_null($loan->real_devolution))){
+                          $time = new Time($loan->real_devolution);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td><?php if(!(is_null($loan->real_borrow))){
+                          $time = new Time($loan->real_borrow);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td><?php if(!(is_null($loan->scheduled_borrow))){
+                          $time = new Time($loan->scheduled_borrow);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
@@ -63,19 +78,117 @@
                 </td>
             </tr>
             <?php endforeach; ?>
-        </tbody>
+             </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-    <h3><?= __('Equipaments') ?></h3>
+
+
+<h3><?= __('Emprestados') ?></h3>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('student_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('equipament_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('scheduled_devolution') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('real_devolution') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('real_borrow') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('scheduled_borrow') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($emprestados as $loan): ?>
+            <tr>
+                <td><?= $this->Number->format($loan->id) ?></td>
+                <td><?= $students->get($loan->student_id)->name  ?></td>
+                <td><?= $equipaments1->get($loan->equipament_id)->name ?></td>
+                 <td><?php if(!(is_null($loan->created))){
+                                $time = new Time($loan->created);
+                                echo $time->format('d-m-Y H:i:s');  
+                            }
+                          ?></td>
+                <td><?php if(!(is_null($loan->modified))){
+                          $time = new Time($loan->modified);
+                          echo $time->format('d-m-Y H:i:s'); } ?></td>
+                <td><?php if(!(is_null($loan->scheduled_devolution))){
+                          $time = new Time($loan->scheduled_devolution);
+                          echo $time->format('d-m-Y H:i:s'); } ?></td>
+                <td><?php if(!(is_null($loan->real_devolution))){
+                          $time = new Time($loan->real_devolution);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td><?php if(!(is_null($loan->real_borrow))){
+                          $time = new Time($loan->real_borrow);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td><?php if(!(is_null($loan->scheduled_borrow))){
+                          $time = new Time($loan->scheduled_borrow);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+             </tbody>
+    </table>
+
+
+<h3><?= __('Próximos Emprestimos Daqui 2 Horas') ?></h3>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('student_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('equipament_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('scheduled_devolution') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('real_devolution') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('real_borrow') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('scheduled_borrow') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($prox_emprestimos as $loan ): ?>
+            <tr>
+                <td><?= $this->Number->format($loan->id) ?></td>
+                <td><?= $students->get($loan->student_id)->name  ?></td>
+                <td><?= $equipaments1->get($loan->equipament_id)->name ?></td>
+                 <td><?php if(!(is_null($loan->created))){
+                                $time = new Time($loan->created);
+                                echo $time->format('d-m-Y H:i:s');  
+                            }
+                          ?></td>
+                <td><?php if(!(is_null($loan->modified))){
+                          $time = new Time($loan->modified);
+                          echo $time->format('d-m-Y H:i:s'); } ?></td>
+                <td><?php if(!(is_null($loan->scheduled_devolution))){
+                          $time = new Time($loan->scheduled_devolution);
+                          echo $time->format('d-m-Y H:i:s'); } ?></td>
+                <td><?php if(!(is_null($loan->real_devolution))){
+                          $time = new Time($loan->real_devolution);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td><?php if(!(is_null($loan->real_borrow))){
+                          $time = new Time($loan->real_borrow);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td><?php if(!(is_null($loan->scheduled_borrow))){
+                          $time = new Time($loan->scheduled_borrow);
+                          echo $time->format('d-m-Y H:i:s');}  ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+             </tbody>
+    </table>
+
+
+    <h3><?= __('Equipamentos Não Emprestados') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>

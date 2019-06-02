@@ -30,26 +30,27 @@ class LoanController extends AppController
 
     public function home()
     {
-        $this->paginate = [
-            'contain' => ['Students', 'Equipaments']
-        ];
         $time = Time::now();
-        $atrasados=$this->Loan->find('all')->where(['Loan.scheduled_devolution <' => $time], ['Loan.real_devolution ='=> ''])->toArray();
-        $emprestados = $this->Loan->find('all')->where(['Loan.real_borrow <'=> $time],['Loan.scheduled_devolution >'=> $time],['Loan.real_devolution ='=> ''])->toArray();
+        //debug($time->format('Y-m-d H:i:s'));
+        $equipaments1=$this->loadModel('Equipaments');
+        $equipaments=$this->loadModel('Equipaments');
+        $students=$this->loadModel('Students');
+        $atrasados=$this->Loan->find('all')->where(['Loan.scheduled_devolution <' => $time->format('Y-m-d H:i:s')])->toArray();
+        //debug($atrasados);
+        $emprestados = $this->Loan->find('all')->where(['Loan.real_borrow <'=> $time->format('Y-m-d H:i:s'),'Loan.scheduled_devolution >'=> $time->format('Y-m-d H:i:s')])->toArray();
         $time2 = Time::now();
         $time2->modify('+2 hours');
-        $prox_emprestimos=$this->Loan->find('all')->where(['Loan.scheduled_borrow <'=> $time2],['Loan.scheduled_borrow >'=> $time])->toArray();
+        $prox_emprestimos=$this->Loan->find('all')->where(['Loan.scheduled_borrow <'=> $time2->format('Y-m-d H:i:s'),'Loan.scheduled_borrow >'=> $time->format('Y-m-d H:i:s')])->toArray();
 
-        $loan = $this->paginate($this->Loan);
-        $equipaments=$this->loadModel('Equipaments');
         $equipaments=$equipaments->find('all')->toArray();
         
-        $this->set('loan', $loan);
         $this->set('equipaments', $equipaments);
         $this->set('atrasados', $atrasados);
         $this->set('emprestados', $emprestados);
         $this->set('prox_emprestimos', $prox_emprestimos);
-        $this->set('loan', $loan);
+        $this->set('students', $students);
+        $this->set('equipaments1', $equipaments1);
+        
         
 
     }
