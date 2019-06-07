@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -75,5 +76,8 @@ class AppController extends Controller
         $this->set('username', $this->Auth->user('username'));
         $this->set('username_id', $this->Auth->user('id'));
         $this->set('username_role', $this->Auth->user('roles_id'));
+        
+        
+        
     }
 }

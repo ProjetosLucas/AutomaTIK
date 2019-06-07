@@ -117,9 +117,26 @@ class UsersController extends AppController
     public function login(){
         if($this->request->is('post')){
             $user = $this->Auth->identify();
+            $this->Auth->setUser($user);
+            $students2=$this->loadModel('Students');
+                $students2=$students2->find('all')->toArray();
             if($user){
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                $student_id=NULL;
+                if(!(is_null($this->Auth->user('id')))){
+                    foreach ($students2 as $student2):
+                            if((($this->Auth->user('id'))==($student2->user_id))){
+                              $student_id=$student2->id;
+                            }
+                    endforeach;
+                        
+                }
+                
+                if(!(is_null($student_id))){
+                        return $this->redirect($this->Auth->redirectUrl());    
+                }else{
+                        return $this->redirect(['controller' => 'Students', 'action' => 'registerstudent']);
+                }
+                
             }
             $this->Flash->error(__('Invalid username or password, try again'));
         }
