@@ -12,12 +12,14 @@
             <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
             <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
+        <li><?= $this->Html->link(__('Devolução'), ['controller' => 'Loan', 'action' => 'devolution']) ?></li>
         </ul>
         <?php endif; ?>
         <?php if ($username_role===2): ?>
         <ul class="side-nav">
             <li class="heading"><?= __('User Actions') ?></li>
             <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
+            <li><?= $this->Html->link(__('Devolução'), ['controller' => 'Loan', 'action' => 'devolution']) ?></li>
             <li><?= $this->Html->link(__('Meus Emprestados'), ['controller' => 'Students', 'action' => 'myloans']) ?></li>
         </ul>
         <?php endif; ?>
@@ -32,8 +34,8 @@
             <li><?= $this->Html->link(__('Adiciona um Empréstimos'), ['controller' => 'Loan', 'action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('Todos os Estudantes'), ['controller' => 'Students', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Adicioanr um Estudante'), ['controller' => 'Students', 'action' => 'add']) ?></li>
-            <li><?= $this->Html->link(__('Todos os Equipamentos'), ['controller' => 'equipaments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Adicioanr um Equipamentos'), ['controller' => 'equipaments', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Kits'), ['controller' => 'equipaments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Adicioanr um Kits'), ['controller' => 'equipaments', 'action' => 'add']) ?></li>
         </ul>
         <?php endif; ?>
 </nav>
@@ -204,7 +206,7 @@
     </table>
 
 
-    <h3><?= __('Equipamentos Não Emprestados') ?></h3>
+    <h3><?= __('Kits Não Emprestados') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -217,7 +219,7 @@
         </thead>
 
 
-        <?php if (($username_role===1)||(!$username)): ?>
+        <?php if (($username_role===1)): ?>
         <tbody>
             <?php foreach ($emprestados2 as $emprestado2): ?>
             <?php foreach ($equipaments as $equipament): ?>
@@ -244,7 +246,7 @@
 
 
 
-        <?php if ($username_role===2): ?>
+        <?php if (($username_role===2)||(!$username)): ?>
         <tbody>
             <?php foreach ($emprestados2 as $emprestado2): ?>
             <?php foreach ($equipaments as $equipament): ?>
