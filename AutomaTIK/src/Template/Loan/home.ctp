@@ -17,8 +17,6 @@
         <?php if ($username_role===2): ?>
         <ul class="side-nav">
             <li class="heading"><?= __('User Actions') ?></li>
-            <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-            <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
             <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
             <li><?= $this->Html->link(__('Meus Emprestados'), ['controller' => 'Students', 'action' => 'myloans']) ?></li>
         </ul>
@@ -26,10 +24,16 @@
         <?php if ($username_role===1): ?>
         <ul class="side-nav">
             <li class="heading"><?= __('Admin Actions') ?></li>
-            <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-            <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
-            <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
-            <li><?= $this->Html->link(__('Meus Emprestados'), ['controller' => 'Students', 'action' => 'myloans']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Setores'), ['controller' => 'Sectors', 'action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('Adiciona um Setor'), ['controller' => 'Sectors', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Usuários'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('Add um Usuário'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Empréstimos'), ['controller' => 'Loan', 'action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('Adiciona um Empréstimos'), ['controller' => 'Loan', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Estudantes'), ['controller' => 'Students', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Adicioanr um Estudante'), ['controller' => 'Students', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Equipamentos'), ['controller' => 'equipaments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Adicioanr um Equipamentos'), ['controller' => 'equipaments', 'action' => 'add']) ?></li>
         </ul>
         <?php endif; ?>
 </nav>
@@ -211,6 +215,9 @@
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
+
+
+        <?php if (($username_role===1)||(!$username)): ?>
         <tbody>
             <?php foreach ($emprestados2 as $emprestado2): ?>
             <?php foreach ($equipaments as $equipament): ?>
@@ -222,9 +229,9 @@
                     <td>".($equipament->code)."</td>
                     <td>".($equipament->in_stock)."</td>
                     <td class='actions'>
-                        ".$this->Html->link(__('View'), ['action' => 'view', $equipament->id])."
-                        ".$this->Html->link(__('Edit'), ['action' => 'edit', $equipament->id])."
-                        ".$this->Form->postLink(__('Delete'), ['action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)])."
+                        ".$this->Html->link(__('View'), ['controller' => 'equipaments','action' => 'view', $equipament->id])."
+                        ".$this->Html->link(__('Edit'), ['controller' => 'equipaments','action' => 'edit', $equipament->id])."
+                        ".$this->Form->postLink(__('Delete'), ['controller' => 'equipaments','action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)])."
                     </td>
                 </tr>" ;
             }
@@ -232,6 +239,32 @@
             <?php endforeach; ?>
             <?php endforeach; ?>
         </tbody>
+        <?php endif; ?>
+
+
+
+
+        <?php if ($username_role===2): ?>
+        <tbody>
+            <?php foreach ($emprestados2 as $emprestado2): ?>
+            <?php foreach ($equipaments as $equipament): ?>
+            <?php
+            if(!(($equipament->id)==($emprestado2->equipament_id))){
+                 echo "<tr>
+                    <td>".$this->Number->format($equipament->id)."</td>
+                    <td>".($equipament->name)."</td>
+                    <td>".($equipament->code)."</td>
+                    <td>".($equipament->in_stock)."</td>
+                    <td class='actions'>
+                    </td>
+                </tr>" ;
+            }
+            ?>
+            <?php endforeach; ?>
+            <?php endforeach; ?>
+        </tbody>
+        <?php endif; ?>
+
     </table>
     
 </div>

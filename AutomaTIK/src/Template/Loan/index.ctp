@@ -5,16 +5,36 @@
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Loan'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Students'), ['controller' => 'Students', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Student'), ['controller' => 'Students', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Equipaments'), ['controller' => 'Equipaments', 'action' => 'index']) ?></li>
+        <?php if (!$username): ?>
+        <ul class="side-nav">
+            <li class="heading"><?= __('Actions') ?></li>
+            <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?></li>
+            <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
+        </ul>
+        <?php endif; ?>
+        <?php if ($username_role===2): ?>
+        <ul class="side-nav">
+            <li class="heading"><?= __('User Actions') ?></li>
+            <li><?= $this->Html->link(__('Novo Empréstimo'), ['controller' => 'Loan', 'action' => 'newloan']) ?></li>
+            <li><?= $this->Html->link(__('Meus Emprestados'), ['controller' => 'Students', 'action' => 'myloans']) ?></li>
+        </ul>
+        <?php endif; ?>
         <?php if ($username_role===1): ?>
-<li><?= $this->Html->link(__('New Equipament'), ['controller' => 'Equipaments', 'action' => 'add']) ?></li>
-<?php endif; ?>
-    </ul>
+        <ul class="side-nav">
+            <li class="heading"><?= __('Admin Actions') ?></li>
+            <li><?= $this->Html->link(__('Todos os Setores'), ['controller' => 'Sectors', 'action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('Adiciona um Setor'), ['controller' => 'Sectors', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Usuários'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('Add um Usuário'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Empréstimos'), ['controller' => 'Loan', 'action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('Adiciona um Empréstimos'), ['controller' => 'Loan', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Estudantes'), ['controller' => 'Students', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Adicioanr um Estudante'), ['controller' => 'Students', 'action' => 'add']) ?></li>
+            <li><?= $this->Html->link(__('Todos os Equipamentos'), ['controller' => 'equipaments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Adicioanr um Equipamentos'), ['controller' => 'equipaments', 'action' => 'add']) ?></li>
+        </ul>
+        <?php endif; ?>
 </nav>
 <div class="loan index large-9 medium-8 columns content">
     <h3><?= __('Loan') ?></h3>
