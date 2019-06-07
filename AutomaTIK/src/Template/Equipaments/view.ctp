@@ -10,7 +10,9 @@
         <li><?= $this->Html->link(__('Edit Equipament'), ['action' => 'edit', $equipament->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Equipament'), ['action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Equipaments'), ['action' => 'index']) ?> </li>
+        <?php if ($username_role===1): ?>
         <li><?= $this->Html->link(__('New Equipament'), ['action' => 'add']) ?> </li>
+        <?php endif; ?>
         <li><?= $this->Html->link(__('List Loan'), ['controller' => 'Loan', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Loan'), ['controller' => 'Loan', 'action' => 'add']) ?> </li>
     </ul>

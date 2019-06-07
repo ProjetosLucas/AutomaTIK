@@ -11,7 +11,9 @@
         <li><?= $this->Html->link(__('List Students'), ['controller' => 'Students', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Student'), ['controller' => 'Students', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Equipaments'), ['controller' => 'Equipaments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Equipament'), ['controller' => 'Equipaments', 'action' => 'add']) ?></li>
+        <?php if ($username_role===1): ?>
+<li><?= $this->Html->link(__('New Equipament'), ['controller' => 'Equipaments', 'action' => 'add']) ?></li>
+<?php endif; ?>
     </ul>
 </nav>
 <div class="loan index large-9 medium-8 columns content">
@@ -45,8 +47,10 @@
                 <td><?= h($loan->scheduled_borrow) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
+                    <?php if ($username_role===1): ?>
+<?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>
+<?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

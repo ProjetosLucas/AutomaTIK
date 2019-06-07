@@ -7,7 +7,9 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Equipament'), ['action' => 'add']) ?></li>
+        <?php if ($username_role===1): ?>
+<li><?= $this->Html->link(__('New Equipament'), ['action' => 'add']) ?></li>
+<?php endif; ?>
         <li><?= $this->Html->link(__('List Loan'), ['controller' => 'Loan', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Loan'), ['controller' => 'Loan', 'action' => 'add']) ?></li>
     </ul>
@@ -33,8 +35,10 @@
                 <td><?= h($equipament->in_stock) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $equipament->id]) ?>
+                    <?php if ($username_role===1): ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $equipament->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

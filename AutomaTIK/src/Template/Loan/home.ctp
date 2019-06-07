@@ -34,6 +34,7 @@
         <?php endif; ?>
 </nav>
 <div class="loan index large-9 medium-8 columns content">
+    <?php if ($username_role===1): ?>
     <h3><?= __('Atrasados') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
@@ -78,8 +79,10 @@
                           echo $time->format('d-m-Y H:i:s');}  ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
+                    <?php if ($username_role===1): ?>
+<?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>
+<?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -131,14 +134,16 @@
                           echo $time->format('d-m-Y H:i:s');}  ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
+                    <?php if ($username_role===1): ?>
+<?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>
+<?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>
              </tbody>
     </table>
-
+<?php endif; ?>
 
 <h3><?= __('Próximos Emprestimos Daqui 2 Horas') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -184,8 +189,10 @@
                           echo $time->format('d-m-Y H:i:s');}  ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
+                    <?php if ($username_role===1): ?>
+<?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>
+<?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>
