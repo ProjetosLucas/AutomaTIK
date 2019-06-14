@@ -91,7 +91,7 @@ class StudentsController extends AppController
             if ($this->Students->save($student)) {
                 $this->Flash->success(__('The student has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Loan', 'action' => 'home']);
             }
             $this->Flash->error(__('The student could not be saved. Please, try again.'));
         }
