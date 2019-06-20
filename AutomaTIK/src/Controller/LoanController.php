@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
+use Cake\Filesystem\File;
 
 
 /**
@@ -169,5 +170,15 @@ class LoanController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+     public function file() {
+        $json = '{"key":"value2"}';
+        $file = new File('web.txt', true);
+        $file->write($json);
+        $file->close(); //... you get it...
+        $filePath = TMP /*.''. DS . ''*/;
+        $this->response->file($file->path, ['download' => true]);
+        return $this->response;
     }
 }
