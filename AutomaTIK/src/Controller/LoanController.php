@@ -177,10 +177,9 @@ class LoanController extends AppController
      public function file() {
         $json = 
 "@ECHO OFF
-ECHO Para conseguir esse c0digo primeiro tem que executar o codigo abaixo.
-ECHO 'cd C:\Users\Mônica\Documents\ArquivosLucas\Projeto Orientado.'
-ECHO 'curl http://localhost/AutomaTIK/AutomaTIK/loan/file (simbulo de maior) script.bat.'
-ECHO Aqui tera os comandos para o Arduino acender para certo armario.
+ECHO Aluno Fulano
+ECHO Armario 3
+ECHO Depois tirar o Pause
 PAUSE";
         $file = new File('script.bat', true);
         $file->write($json);
