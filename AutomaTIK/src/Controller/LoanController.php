@@ -27,6 +27,8 @@ class LoanController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow('home');
+        $this->Auth->allow('file');
+
     }
 
     public function home()
@@ -173,11 +175,17 @@ class LoanController extends AppController
     }
 
      public function file() {
-        $json = '{"key":"value2"}';
-        $file = new File('web.txt', true);
+        $json = 
+"@ECHO OFF
+ECHO Para conseguir esse c0digo primeiro tem que executar o codigo abaixo.
+ECHO 'cd C:\Users\Mônica\Documents\ArquivosLucas\Projeto Orientado.'
+ECHO 'curl http://localhost/AutomaTIK/AutomaTIK/loan/file (simbulo de maior) script.bat.'
+ECHO Aqui tera os comandos para o Arduino acender para certo armario.
+PAUSE";
+        $file = new File('script.bat', true);
         $file->write($json);
         $file->close(); //... you get it...
-        $filePath = TMP /*.''. DS . ''*/;
+        //$filePath = TMP /*.''. DS . ''*/;
         $this->response->file($file->path, ['download' => true]);
         return $this->response;
     }
