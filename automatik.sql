@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 03-Jun-2019 às 01:04
--- Versão do servidor: 10.1.37-MariaDB
--- versão do PHP: 7.3.1
+-- Host: localhost:3306
+-- Generation Time: 21-Jun-2019 às 03:43
+-- Versão do servidor: 10.3.14-MariaDB
+-- versão do PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `automatik`
+-- Database: `id9854722_automatik`
 --
 
 -- --------------------------------------------------------
@@ -33,17 +33,18 @@ CREATE TABLE `equipaments` (
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `in_stock` tinyint(1) NOT NULL
+  `in_stock` tinyint(1) NOT NULL,
+  `open_cabinet` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `equipaments`
 --
 
-INSERT INTO `equipaments` (`id`, `name`, `code`, `description`, `in_stock`) VALUES
-(1, 'Kit para Laboratório 1', '134214214214321', 'Kit para Laboratório 1', 1),
-(2, 'Kit para Laboratório 2', '1342142142355', 'Kit para Laboratório 2', 1),
-(3, 'Kit para Laboratório 3', '134214214214321', 'Kit para Laboratório 3', 1);
+INSERT INTO `equipaments` (`id`, `name`, `code`, `description`, `in_stock`, `open_cabinet`) VALUES
+(1, 'Kit para Laboratório 1', '134214214214321', 'Kit para Laboratório 1', 1, 1),
+(2, 'Kit para Laboratório 2', '1342142142355', 'Kit para Laboratório 2', 1, NULL),
+(3, 'Kit para Laboratório 3', '134214214214321', 'Kit para Laboratório 3', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ CREATE TABLE `loan` (
 INSERT INTO `loan` (`id`, `student_id`, `equipament_id`, `created`, `modified`, `scheduled_devolution`, `real_devolution`, `real_borrow`, `scheduled_borrow`) VALUES
 (1, 2, 2, '2019-05-19 01:12:59', '2019-06-02 21:24:47', '2019-08-24 11:16:00', NULL, '2019-05-30 15:15:00', '2019-05-31 16:16:00'),
 (2, 1, 1, '2019-06-02 18:25:26', '2019-06-02 18:25:26', '2019-06-01 11:17:00', NULL, '2019-05-30 15:15:00', '2019-05-31 22:16:00'),
-(4, 1, 1, '2019-06-02 22:34:05', '2019-06-02 22:34:05', '2022-02-04 02:03:00', NULL, NULL, '2019-04-03 02:03:00'),
+(4, 1, 1, '2019-06-02 22:34:05', '2019-06-21 03:36:04', '2022-02-04 02:03:00', NULL, '2019-06-21 03:36:04', '2019-06-21 05:03:00'),
 (5, 2, 1, '2019-06-02 22:37:15', '2019-06-02 22:37:15', '2021-02-03 03:02:00', NULL, NULL, '2023-01-02 01:01:00');
 
 -- --------------------------------------------------------
@@ -138,7 +139,10 @@ INSERT INTO `students` (`id`, `code`, `cpf`, `sector_id`, `fone`, `name`, `email
 (1, '134214214151', '16123419773', 1, '(27)996221801', 'Lucas Soares Pessini', 'lucassoarespessini@gmail.com', '2015100655', 1),
 (2, '134214211234', '12341235135135', 1, '(27)999832105', 'Thais M Marchesi', 'thais.mmarchesi@gmail.com', '2015100633', 2),
 (3, '134214214154', '6264356477647654', 1, '(27)998846735', 'Debora Fortuna', 'deborafortuna28@gmail.com', '2015100677', 3),
-(4, '134214214151', '12341235135134', 1, '(27)998345065', 'Franco Marchiori Louzada', 'fmarchiorilouzada@gmail.com', '2015100644', 4);
+(4, '134214214151', '12341235135134', 1, '(27)998345065', 'Franco Marchiori Louzada', 'fmarchiorilouzada@gmail.com', '2015100644', 4),
+(5, '134214214151', '16123419773', 1, '27996459075', 'asdfaf', 'as.pessini@gmail.com', '2015100633', 8),
+(6, '2210', '00000000000', 1, '000000000', 'debs', 'debinha22@hotmail.com', '2210', 9),
+(7, '134214214151', '16123419773', 1, '12342143412', 'teste31', 'teste31@gmail.com', '12413412341', 10);
 
 -- --------------------------------------------------------
 
@@ -165,7 +169,12 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `roles_id`, 
 (1, 'Admin', 'admin', 'admin@gmail.com', '$2y$10$NbwCZuKu9o6BY0TeH8XIpOzyrTNDWH25XSb1H6wNLW1AGsmY.z1Im', 1, '2019-05-18 21:57:39', '2019-05-19 00:08:33'),
 (2, 'Teste', 'teste', 'teste@gmail.com', '$2y$10$vC6eMeA.w9U9xshNCI9XTuWvolyrZglqUqgXlO/YeJ1Z4HEiklCc2', 1, '2019-05-18 23:16:42', '2019-05-19 00:08:59'),
 (4, 'asd', 'qd', 'asd@adfs.com', 'asd', 1, '2019-05-18 23:54:56', '2019-05-18 23:54:56'),
-(5, 'sfd', 'asdf', 'admin2@gmail.com', 'asdf', 1, '2019-05-18 23:58:33', '2019-05-18 23:58:33');
+(5, 'sfd', 'asdf', 'admin2@gmail.com', 'asdf', 1, '2019-05-18 23:58:33', '2019-05-18 23:58:33'),
+(6, 'Fulado', 'de Tal', 'fulano@gmail.com', '$2y$10$P6sdegsKba1KptmwipUvleKMwJ2356zpCCvxyfJV9FI5H3MDnSTxC', 2, '2019-06-07 00:07:37', '2019-06-07 00:07:37'),
+(7, 'Fulado', 'fulanodetal', 'fulanodetal@gmail.com', '$2y$10$rlujvJ67SD3Pgx9k7UySiuzkGUzu0mJLxw6GtmDVUIEleO53ypny2', 2, '2019-06-07 00:09:27', '2019-06-07 00:09:27'),
+(8, 'teste4', 'teste4', 'teste4@gmail.com', '$2y$10$uYTUZy4mHTSiUsFOL0aMhe5cwBf3ijpfKvmCNKOdOsoieZl.F.K7e', 2, '2019-06-07 03:37:46', '2019-06-07 03:37:46'),
+(9, 'debs', 'fortuninha', 'debinha22@hotmail.com', '$2y$10$paypEOT8sa/WZLlodXt14.YKcZI.wLD27cv67JUFOtuHkxP.xh4uu', 2, '2019-06-12 20:39:13', '2019-06-12 20:39:13'),
+(10, 'teste31', 'teste31', 'teste31@gmail.com', '$2y$10$db5jNfuDXeyioXDrOEvFKe3R9yYzD6lNsFSDLkxW1o9OlVkNL6tQG', 2, '2019-06-14 18:59:54', '2019-06-14 18:59:54');
 
 --
 -- Indexes for dumped tables
@@ -239,13 +248,13 @@ ALTER TABLE `sectors`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
