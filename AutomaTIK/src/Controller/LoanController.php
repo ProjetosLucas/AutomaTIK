@@ -200,19 +200,58 @@ class LoanController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function devolution()
+    {
+       $studentsTable = TableRegistry::get('Students');
+        $studentsTable = TableRegistry::getTableLocator()->get('students');
+        $student = $studentsTable->find('all')->where(['user_id =' => $this->Auth->user()['id']])->toArray(); 
+        $emprestimos_ndevolvidos=$this->Loan->find('all')->where(['Loan.real_borrow IS NOT NULL','Loan.real_devolution IS NULL','Loan.student_id ='=> $student[0]->id ])->toArray();
+      $this->set('emprestimos_ndevolvidos', $emprestimos_ndevolvidos);
+      $this->set('students', $this->loadModel('Students'));
+      $this->set('equipaments1', $this->loadModel('Equipaments'));
+
+        
+    }
+    public function devolution2($id = null)
+    {
+        $loan = $this->Loan->get($id, [
+            'contain' => []
+        ]);
+        $studentsTable = TableRegistry::get('Students');
+        $studentsTable = TableRegistry::getTableLocator()->get('students');
+        $student = $studentsTable->get($loan->student_id); // Return article with id 12
+
+        if($this->Auth->user()['id']==$student->user_id){
+            $equipamentsTable = TableRegistry::get('Equipaments');
+            $equipamentsTable = TableRegistry::getTableLocator()->get('equipaments');
+            $equipament = $equipamentsTable->get($loan->equipament_id); // Return article with id 12
+            $equipament->open_cabinet = true;
+            $equipamentsTable->save($equipament);
+            $loan->real_devolution = Time::now();
+            $this->Loan->save($loan);
+            $this->Auth->logout();
+            $this->Flash->success(__('Você pode devolver o seu equipamento. Você tem 5 minutos para devolver.'));  
+        }else{
+          $this->Flash->error(__('Você não pode pegar o equipamento.'));
+        }
+        return $this->redirect(['action' => 'home']);
+        
+
+    }
 
      public function file() {
         $time2 = Time::now();
         $time2->modify('-5 min');
 
         $equipamentsTable=$this->loadModel('Equipaments');
-        $equipamentsTable=$equipamentsTable->find('all')->toArray();
+        $equipaments3=$equipamentsTable->find('all')->toArray();
         $json = '';
-        foreach ($equipamentsTable as $equipament):
+        foreach ($equipaments3 as $equipament):
         $loan1=$this->Loan->find('all')->where(['Loan.equipament_id ='=> $equipament->id,'Loan.real_borrow >'=> $time2->format('Y-m-d H:i:s')])->toArray();
+        $loan2=$this->Loan->find('all')->where(['Loan.equipament_id ='=> $equipament->id,'Loan.real_devolution >'=> $time2->format('Y-m-d H:i:s')])->toArray();
         //debug(!(($loan1)==[]));
         //debug($equipament->open_cabinet);
-        if(($equipament->open_cabinet) and !(($loan1)==[])){
+        if(($equipament->open_cabinet) and ((!(($loan1)==[])) or (!($loan2)==[]))){
           $json = 
 'MODE COM3 BAUD=9600 PARITY=n DATA=8
 ECHO a > COM3';
@@ -220,10 +259,13 @@ ECHO a > COM3';
           $json = 
 'MODE COM3 BAUD=9600 PARITY=n DATA=8
 ECHO b > COM3';
+          $equipament2 = $equipamentsTable->get($equipament->id);
+          $equipament2->open_cabinet = false;
+          $equipamentsTable->save($equipament2);
         }
         endforeach;
-       //debug($json);
-        
+       //debug(($equipament->open_cabinet) and ((!(($loan1)==[])) or (!($loan2)==[])));
+        //exit();
         $file = new File('script.bat', true);
         $file->write($json);
         $file->close();
