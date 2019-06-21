@@ -30,6 +30,7 @@ class Equipament extends Entity
         'code' => true,
         'description' => true,
         'in_stock' => true,
+        'open_cabinet' => true,
         'loan' => true
     ];
 }

@@ -40,6 +40,7 @@
         <?php endif; ?>
 </nav>
 <div class="loan index large-9 medium-8 columns content">
+    <h2><?= __('Horario Atual: '.$time_now->format('d-m-Y H:i:s')) ?></h2>
     <?php if ($username_role===1): ?>
     <h3><?= __('Atrasados') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -194,7 +195,7 @@
                           $time = new Time($loan->scheduled_borrow);
                           echo $time->format('d-m-Y H:i:s');}  ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $loan->id]) ?>
+                    <?= $this->Html->link(__('Get'), ['action' => 'get', $loan->id]) ?>
                     <?php if ($username_role===1): ?>
 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loan->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?>

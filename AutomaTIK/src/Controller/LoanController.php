@@ -7,7 +7,6 @@ use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
 use Cake\Filesystem\File;
 
-
 /**
  * Loan Controller
  *
@@ -55,7 +54,36 @@ class LoanController extends AppController
         $this->set('prox_emprestimos', $prox_emprestimos);
         $this->set('students', $students);
         $this->set('equipaments1', $equipaments1);
+        $this->set('time_now',Time::now());
+
         
+        
+
+    }
+    public function get($id = null)
+    {
+        $loan = $this->Loan->get($id, [
+            'contain' => []
+        ]);
+        $studentsTable = TableRegistry::get('Students');
+        $studentsTable = TableRegistry::getTableLocator()->get('students');
+        $student = $studentsTable->get($loan->student_id); // Return article with id 12
+
+        if($this->Auth->user()['id']==$student->user_id){
+            $equipamentsTable = TableRegistry::get('Equipaments');
+            $equipamentsTable = TableRegistry::getTableLocator()->get('equipaments');
+            $equipament = $equipamentsTable->get($loan->equipament_id); // Return article with id 12
+            $equipament->open_cabinet = true;
+            $equipamentsTable->save($equipament);
+            $loan->real_borrow = Time::now();
+            $this->Loan->save($loan);
+            debug($this->Auth->user()['id']);
+            debug($student->user_id);
+            $this->Flash->success(__('Você pode pegar o seu equipamento'));  
+        }else{
+          $this->Flash->error(__('Você não pode pegar o equipamento.'));
+        }
+        return $this->redirect(['action' => 'home']);
         
 
     }
@@ -176,11 +204,28 @@ class LoanController extends AppController
 
      public function file() {
         $json = 
-"@ECHO OFF
-ECHO Aluno Fulano
-ECHO Armario 3
-ECHO Depois tirar o Pause
-PAUSE";
+' MODE COM3 BAUD=9600 PARITY=n DATA=8
+    
+  CHOICE /C:1234 /M "1: liga; 2: desliga; 3: pisca; 4: sair " 
+  IF errorlevel 4 GOTO SAIR
+  IF errorlevel 3 GOTO PISCA
+  IF errorlevel 2 GOTO DESLIGA 
+  IF errorlevel 1 GOTO LIGA
+ 
+  :DESLIGA  
+  ECHO b > COM3 
+  GOTO END
+ 
+  :LIGA
+  ECHO a > COM3  
+  GOTO END
+ 
+  :PISCA
+  ECHO c > COM3  
+  GOTO END
+ STOP
+  :END
+ ';
         $file = new File('script.bat', true);
         $file->write($json);
         $file->close(); //... you get it...

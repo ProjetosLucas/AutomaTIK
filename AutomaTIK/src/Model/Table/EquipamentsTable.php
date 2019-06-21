@@ -75,6 +75,9 @@ class EquipamentsTable extends Table
             ->requirePresence('in_stock', 'create')
             ->allowEmptyString('in_stock', false);
 
+        $validator
+            ->boolean('open_cabinet');
+
         return $validator;
     }
 }
