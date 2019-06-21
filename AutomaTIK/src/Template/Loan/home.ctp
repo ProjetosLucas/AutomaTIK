@@ -222,10 +222,17 @@
 
         <?php if (($username_role===1)): ?>
         <tbody>
-            <?php foreach ($emprestados2 as $emprestado2): ?>
+            <?php $ja_emprestado=0; ?>
             <?php foreach ($equipaments as $equipament): ?>
+            <?php foreach ($emprestados2 as $emprestado2): ?>
             <?php
-            if(!(($equipament->id)==($emprestado2->equipament_id))){
+            if((($equipament->id)==($emprestado2->equipament_id))){
+                $ja_emprestado=1;
+            }
+            ?>
+            <?php endforeach; ?>
+            <?php
+            if($ja_emprestado==0){
                  echo "<tr>
                     <td>".$this->Number->format($equipament->id)."</td>
                     <td>".($equipament->name)."</td>
@@ -237,9 +244,10 @@
                         ".$this->Form->postLink(__('Delete'), ['controller' => 'equipaments','action' => 'delete', $equipament->id], ['confirm' => __('Are you sure you want to delete # {0}?', $equipament->id)])."
                     </td>
                 </tr>" ;
+                break;
             }
             ?>
-            <?php endforeach; ?>
+            <?php $ja_emprestado=0; ?>
             <?php endforeach; ?>
         </tbody>
         <?php endif; ?>
@@ -247,12 +255,21 @@
 
 
 
+
+
         <?php if (($username_role===2)||(!$username)): ?>
         <tbody>
-            <?php foreach ($emprestados2 as $emprestado2): ?>
+            <?php $ja_emprestado=0; ?>
             <?php foreach ($equipaments as $equipament): ?>
+            <?php foreach ($emprestados2 as $emprestado2): ?>
             <?php
-            if(!(($equipament->id)==($emprestado2->equipament_id))){
+            if((($equipament->id)==($emprestado2->equipament_id))){
+                $ja_emprestado=1;
+            }
+            ?>
+            <?php endforeach; ?>
+            <?php
+            if($ja_emprestado==0){
                  echo "<tr>
                     <td>".$this->Number->format($equipament->id)."</td>
                     <td>".($equipament->name)."</td>
@@ -261,9 +278,10 @@
                     <td class='actions'>
                     </td>
                 </tr>" ;
+                break;
             }
             ?>
-            <?php endforeach; ?>
+            <?php $ja_emprestado=0; ?>
             <?php endforeach; ?>
         </tbody>
         <?php endif; ?>

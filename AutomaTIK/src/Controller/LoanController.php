@@ -43,8 +43,8 @@ class LoanController extends AppController
         $emprestados2 = $this->Loan->find('all')->where(['Loan.real_borrow <'=> $time->format('Y-m-d H:i:s'),'Loan.scheduled_devolution >'=> $time->format('Y-m-d H:i:s')])->toArray();
         $time2 = Time::now();
         $time2->modify('+2 hours');
-        $prox_emprestimos=$this->Loan->find('all')->where(['Loan.scheduled_borrow <'=> $time2->format('Y-m-d H:i:s'),'Loan.scheduled_borrow >'=> $time->format('Y-m-d H:i:s')])->toArray();
-
+        $prox_emprestimos=$this->Loan->find('all')->where(['Loan.scheduled_borrow <'=> $time2->format('Y-m-d H:i:s'),'Loan.scheduled_borrow >'=> $time->format('Y-m-d H:i:s'),'Loan.real_borrow IS NULL'] )->toArray();
+        
         $equipaments=$equipaments->find('all')->toArray();
         
         $this->set('equipaments', $equipaments);
@@ -77,9 +77,8 @@ class LoanController extends AppController
             $equipamentsTable->save($equipament);
             $loan->real_borrow = Time::now();
             $this->Loan->save($loan);
-            debug($this->Auth->user()['id']);
-            debug($student->user_id);
-            $this->Flash->success(__('Você pode pegar o seu equipamento'));  
+            $this->Auth->logout();
+            $this->Flash->success(__('Você pode pegar o seu equipamento. Você tem 5 minutos para pegar.'));  
         }else{
           $this->Flash->error(__('Você não pode pegar o equipamento.'));
         }
@@ -203,33 +202,31 @@ class LoanController extends AppController
     }
 
      public function file() {
-        $json = 
-' MODE COM3 BAUD=9600 PARITY=n DATA=8
-    
-  CHOICE /C:1234 /M "1: liga; 2: desliga; 3: pisca; 4: sair " 
-  IF errorlevel 4 GOTO SAIR
-  IF errorlevel 3 GOTO PISCA
-  IF errorlevel 2 GOTO DESLIGA 
-  IF errorlevel 1 GOTO LIGA
- 
-  :DESLIGA  
-  ECHO b > COM3 
-  GOTO END
- 
-  :LIGA
-  ECHO a > COM3  
-  GOTO END
- 
-  :PISCA
-  ECHO c > COM3  
-  GOTO END
- STOP
-  :END
- ';
+        $time2 = Time::now();
+        $time2->modify('-5 min');
+
+        $equipamentsTable=$this->loadModel('Equipaments');
+        $equipamentsTable=$equipamentsTable->find('all')->toArray();
+        $json = '';
+        foreach ($equipamentsTable as $equipament):
+        $loan1=$this->Loan->find('all')->where(['Loan.equipament_id ='=> $equipament->id,'Loan.real_borrow >'=> $time2->format('Y-m-d H:i:s')])->toArray();
+        //debug(!(($loan1)==[]));
+        //debug($equipament->open_cabinet);
+        if(($equipament->open_cabinet) and !(($loan1)==[])){
+          $json = 
+'MODE COM3 BAUD=9600 PARITY=n DATA=8
+ECHO a > COM3';
+        }elseif($json == ''){
+          $json = 
+'MODE COM3 BAUD=9600 PARITY=n DATA=8
+ECHO b > COM3';
+        }
+        endforeach;
+       //debug($json);
+        
         $file = new File('script.bat', true);
         $file->write($json);
-        $file->close(); //... you get it...
-        //$filePath = TMP /*.''. DS . ''*/;
+        $file->close();
         $this->response->file($file->path, ['download' => true]);
         return $this->response;
     }
