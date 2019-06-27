@@ -29,6 +29,30 @@ class LoanController extends AppController
         $this->Auth->allow('file');
 
     }
+    public function download() {
+        $loans = $this->Loan->find('all', [
+            'contain' => ['Students', 'Equipaments']
+        ]);
+        $json = 'id;student;equipament;created;modified;scheduled_devolution;real_devolution;scheduled_borrow
+';
+        foreach ($loans as $loan):
+            $json=$json.$loan->id;
+            $json=$json.';'.$loan->student->name;
+            $json=$json.';'.$loan->equipament->name;
+            $json=$json.';'.$loan->created;
+            $json=$json.';'.$loan->modified;
+            $json=$json.';'.$loan->scheduled_devolution;
+            $json=$json.';'.$loan->real_devolution;
+            $json=$json.';'.$loan->scheduled_borrow;
+            $json =$json.'
+';
+        endforeach;
+        $file = new File('emprestimos.csv', true);
+        $file->write($json);
+        $file->close();
+        $this->response->file($file->path, ['download' => true]);
+        return $this->response;
+    }
 
     public function home()
     {

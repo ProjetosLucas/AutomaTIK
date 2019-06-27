@@ -3,6 +3,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
+use Cake\Filesystem\File;
+
 
 /**
  * Users Controller
@@ -13,6 +17,32 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
+     
+     public function download() {
+        $users = $this->Users->find('all', [
+            'contain' => ['Roles']
+        ]);
+        $json = 'id;name;username;email;password;role;created;modified
+';
+        foreach ($users as $user):
+            $json=$json.$user->id;
+            $json=$json.';'.$user->name;
+            $json=$json.';'.$user->username;
+            $json=$json.';'.$user->email;
+            $json=$json.';'.$user->password;
+            $json=$json.';'.$user->role->role;
+            $json=$json.';'.$user->created;
+            $json=$json.';'.$user->modified;
+            $json =$json.'
+';
+        endforeach;
+        $file = new File('users.csv', true);
+        $file->write($json);
+        $file->close();
+        $this->response->file($file->path, ['download' => true]);
+        return $this->response;
+    }
+
      public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);

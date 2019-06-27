@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
+use Cake\Filesystem\File;
 
 /**
  * Sectors Controller
@@ -12,6 +14,31 @@ use App\Controller\AppController;
  */
 class SectorsController extends AppController
 {
+    
+
+
+    public function download() {
+        $sectors = $this->Sectors->find('all');
+        $json = 'id;name
+';
+        foreach ($sectors as $sector):
+            $json=$json.$sector->id;
+            $json=$json.';'.$sector->name;
+            $json =$json.'
+';
+        endforeach;
+        $file = new File('sectors.csv', true);
+        $file->write($json);
+        $file->close();
+        $this->response->file($file->path, ['download' => true]);
+        return $this->response;
+    }
+
+
+
+
+
+
     /**
      * Index method
      *

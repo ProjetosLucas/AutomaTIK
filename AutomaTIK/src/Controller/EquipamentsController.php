@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
+use Cake\Filesystem\File;
 
 /**
  * Equipaments Controller
@@ -23,6 +25,26 @@ class EquipamentsController extends AppController
 
         $this->set(compact('equipaments'));
     }
+
+    public function download() {
+        $equipaments = $this->Equipaments->find('all');
+        $json = 'id;name;code;in_stock
+';
+        foreach ($equipaments as $equipament):
+            $json=$json.$equipament->id;
+            $json=$json.';'.$equipament->name;
+            $json=$json.';'.$equipament->code;
+            $json=$json.';'.$equipament->in_stock;
+            $json =$json.'
+';
+        endforeach;
+        $file = new File('kits.csv', true);
+        $file->write($json);
+        $file->close();
+        $this->response->file($file->path, ['download' => true]);
+        return $this->response;
+    }
+
 
     /**
      * View method

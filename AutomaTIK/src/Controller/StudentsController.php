@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
+use Cake\Filesystem\File;
+
 
 /**
  * Students Controller
@@ -25,6 +28,31 @@ class StudentsController extends AppController
         $students = $this->paginate($this->Students);
 
         $this->set(compact('students'));
+    }
+public function download() {
+        $students = $this->Students->find('all', [
+            'contain' => ['Sectors', 'Users']
+        ]);
+        $json = 'id;code;cpf;sector;user;fone;name;email;registration
+';
+        foreach ($students as $student):
+            $json=$json.$student->id;
+            $json=$json.';'.$student->code;
+            $json=$json.';'.$student->cpf;
+            $json=$json.';'.$student->sector->name;
+            $json=$json.';'.$student->user->name;
+            $json=$json.';'.$student->fone;
+            $json=$json.';'.$student->name;
+            $json=$json.';'.$student->email;
+            $json=$json.';'.$student->registration;
+            $json =$json.'
+';
+        endforeach;
+        $file = new File('students.csv', true);
+        $file->write($json);
+        $file->close();
+        $this->response->file($file->path, ['download' => true]);
+        return $this->response;
     }
 
     /**
