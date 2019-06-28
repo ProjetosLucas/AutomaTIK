@@ -277,12 +277,12 @@ class LoanController extends AppController
         //debug($equipament->open_cabinet);
         if(($equipament->open_cabinet) and ((!(($loan1)==[])) or (!($loan2)==[]))){
           $json = 
-'MODE COM3 BAUD=9600 PARITY=n DATA=8
-ECHO a > COM3';
+'MODE COM%NUM% BAUD=9600 PARITY=n DATA=8
+ECHO a > COM%NUM%';
         }elseif($json == ''){
           $json = 
-'MODE COM3 BAUD=9600 PARITY=n DATA=8
-ECHO b > COM3';
+'MODE COM%NUM% BAUD=9600 PARITY=n DATA=8
+ECHO b > COM%NUM%';
           $equipament2 = $equipamentsTable->get($equipament->id);
           $equipament2->open_cabinet = false;
           $equipamentsTable->save($equipament2);
