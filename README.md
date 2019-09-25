@@ -99,22 +99,24 @@ Para:
 15- Clica na pasta projeto para ver o site.
 
 16- ATENÇÃO: Antes de começa a fazer a alteração no código faça o seguinte, onde você coloca o seu e-mail no "you@example.com", o seu nome em "Your Name".
-	
+```bash	
 	git config --global user.email "you@example.com"
 	git config --global user.name "Your Name"
 	cd C:\xampp\htdocs\AutomaTIK
 	git pull
-
+```
 Caso perceba que ocorreu alguma mudança no arquivo automatik.sql (É dito na tela preta do git), faça a atualização do banco de dados do seu computador: abra o Navegador (GoogleChrome, Mozilla,...) e  escreva: localhost/phpmyadmin/, e vai em cima da tela e aperta Base de Dados, depois seleciona "automatik" e aperta "Elimina" e depois em "OK". Logo, no canto esquerdo da tela  aperta em "New" e em "Criar base de Dados" escreva "automatik". Depois vai na aba importar e aperte "Escolher Arquivo", escolha o seguinte arquivo: C:\xampp\htdocs\AutomaTIK\automatik.sql e depois aperta em "Executar". 
 
 
 17 - Qualquer modificação você deve fazer o seguinte, abrir o git e fazer os seguintes comandos, onde você coloca o seu e-mail no "you@example.com", o seu nome em "Your Name" e algum comentário em  "Algum Comentario":
-	
+
+```bash	
 	git config --global user.email "you@example.com"
 	git config --global user.name "Your Name"
 	cd C:\xampp\htdocs\AutomaTIK
 	git add .
 	git commit -m "Algum Comentario"
 	git push
+```
 
 Onde irá atualizar o código do github. Atualiza sempre o beckup do banco de dados que está presente no arquivo C:\xampp\htdocs\AutomaTIK\automatik.sql. Para fazer o beckup é só digitar localhost/phpmyadmin/ no navegador, apertar no Menu do lado esquerdo em "automatik", aperta depois em "exportar" e depois em executar. O arquivo que foi feito o download sobreescreve sobre o arquivo C:\xampp\htdocs\AutomaTIK\automatik.sql.
