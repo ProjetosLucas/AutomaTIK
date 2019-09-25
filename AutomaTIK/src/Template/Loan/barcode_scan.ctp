@@ -1,28 +1,11 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="ZXing for JS">
 
-    <title>ZXing TypeScript | Demo &amp; Examples</title>
 
-    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
-    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
-</head>
-
-<body>
 
     <main class="wrapper" style="padding-top:2em">
 
         <section class="container" id="demo-content">
             <h1 class="title">Scan barcode from Video Camera</h1>
-
-            <p>
-                <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
-            </p>
 
             <p>
                 This example shows how to scan a barcode with ZXing javascript library from the device video camera. If more
@@ -110,6 +93,3 @@
         })
     </script>
 
-</body>
-
-</html>
