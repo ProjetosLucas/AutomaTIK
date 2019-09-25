@@ -296,4 +296,7 @@ ECHO b > COM%NUM%';
         $this->response->file($file->path, ['download' => true]);
         return $this->response;
     }
+
+    public function barcodeScan() {
+    }
 }
