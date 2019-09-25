@@ -35,7 +35,7 @@ Segue os passos para colocar no seu computador
 12-Depois vai na aba importar e aperte "Escolher Arquivo" e escolha o seguinte arquivo: C:\xampp\htdocs\AutomaTIK\automatik.sql. Depois aperte em "Executar".
 
 13-No arquivo C:\xampp\htdocs\AutomaTIK\AutomaTIK\config\app.php, faça a seguinte alteração da seguinte parte do código:
-
+```php
 	'Datasources' => [
 		'default' => [
 	            'className' => 'Cake\Database\Connection',
@@ -59,11 +59,11 @@ Segue os passos para colocar no seu computador
 			'flags' => [],
 	            'cacheMetadata' => true,	
             'log' => false,
-
+```
 
 Para:
 
-
+```php
 	'Datasources' => [
 		'default' => [
 	            'className' => 'Cake\Database\Connection',
@@ -88,7 +88,7 @@ Para:
 	            'cacheMetadata' => true,
             'log' => false,
 
-
+```
 
 
 
