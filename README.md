@@ -16,9 +16,9 @@ Segue os passos para colocar no seu computador
 6- Instala o Composer (Pode achar o instalador olhe o seguinte site https://getcomposer.org/Composer-Setup.exe). OBSERVAÇÃO: Na aba Settings Check, quando ele pede "Choose the Command-Line PHP you want to use:" escolha a opção C:\xamppp\php\php.exe.
 
 7- Abra o Git e escreva o seguinte comando: 
-
+'''bash
 	git clone https://github.com/ProjetosLucas/AutomaTIK.git C:\xampp\htdocs\AutomaTIK
-
+'''
 8- No prompt escreva os seguintes comandos:
  
 	cd C:\xampp\htdocs\AutomaTIK\AutomaTIK
