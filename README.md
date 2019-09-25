@@ -20,11 +20,11 @@ Segue os passos para colocar no seu computador
 	git clone https://github.com/ProjetosLucas/AutomaTIK.git C:\xampp\htdocs\AutomaTIK
 '''
 8- No prompt escreva os seguintes comandos:
- 
+ '''bash
 	cd C:\xampp\htdocs\AutomaTIK\AutomaTIK
 	composer install
 	composer upgrade 
-
+'''
 9- Abra o Xampp (Xampp Control Panel) e aperte "Start" para todos os módulos, para inicializar todos os seus serviços.
 
 10- Depois de ter inicializados os serviços do Xampp, abra um Navegador (GoogleChrome, Mozilla,...) e escreva: localhost/phpmyadmin/
