@@ -11,18 +11,18 @@ Segue os passos para colocar no seu computador
 
 4- Instala o Xampp que está no seguinte site : https://www.apachefriends.org/xampp-files/7.3.1/xampp-win32-7.3.1-0-VC15-installer.exe.
 
-5- Abra o arquivo C:\xampp\php\php.ini e altera a linha ';extension=php_intl.dll' ou ';extension=intl'  para 'extension=php_intl.dll' ou 'extension=intl' (remover o ponto e vírgula) e salva o arquivo. Copie todos os arquivos /xamp/php/ic*.dll para /xampp/apache/bin.
+5- Abra o arquivo C:/xampp/php/php.ini e altera a linha ';extension=php_intl.dll' ou ';extension=intl'  para 'extension=php_intl.dll' ou 'extension=intl' (remover o ponto e vírgula) e salva o arquivo. Copie todos os arquivos C:/xampp/php/ic*.dll para C:/xampp/apache/bin.
 
-6- Instala o Composer (Pode achar o instalador olhe o seguinte site https://getcomposer.org/Composer-Setup.exe). OBSERVAÇÃO: Na aba Settings Check, quando ele pede "Choose the Command-Line PHP you want to use:" escolha a opção C:\xamppp\php\php.exe.
+6- Instala o Composer (Pode achar o instalador olhe o seguinte site https://getcomposer.org/Composer-Setup.exe). OBSERVAÇÃO: Na aba Settings Check, quando ele pede "Choose the Command-Line PHP you want to use:" escolha a opção C:/xamppp/php/php.exe.
 
 7- Abra o Git e escreva o seguinte comando: 
 
 ```bash
-	git clone https://github.com/ProjetosLucas/AutomaTIK.git C:\xampp\htdocs\AutomaTIK
+	git clone https://github.com/ProjetosLucas/AutomaTIK.git C:/xampp/htdocs/AutomaTIK
 ```
 8- No prompt escreva os seguintes comandos:
  ```bash
-	cd C:\xampp\htdocs\AutomaTIK\AutomaTIK
+	cd C:/xampp/htdocs/AutomaTIK/AutomaTIK
 	composer install
 	composer upgrade 
 ```
@@ -32,9 +32,9 @@ Segue os passos para colocar no seu computador
 
 11-Aperta no canto esquerdo da tela "New" e em "Criar base de Dados" escreva "automatik"
 
-12-Depois vai na aba importar e aperte "Escolher Arquivo" e escolha o seguinte arquivo: C:\xampp\htdocs\AutomaTIK\automatik.sql. Depois aperte em "Executar".
+12-Depois vai na aba importar e aperte "Escolher Arquivo" e escolha o seguinte arquivo: C:/xampp/htdocs/AutomaTIK/automatik.sql. Depois aperte em "Executar".
 
-13-No arquivo C:\xampp\htdocs\AutomaTIK\AutomaTIK\config\app.php, faça a seguinte alteração da seguinte parte do código:
+13-No arquivo C:/xampp/htdocs/AutomaTIK/AutomaTIK/config/app.php, faça a seguinte alteração da seguinte parte do código:
 ```php
 	'Datasources' => [
 		'default' => [
@@ -94,7 +94,7 @@ Para:
 
 13- Agora com o Navegador (GoogleChrome, Mozilla,...) e escreva: localhost/AutomaTIK/
 
-14- Assim o navegador irá mostrar o Projeto baixado pelo git clone. Lembrando que esse projeto está salvo em: C:\xampp\htdocs\AutomaTIK. Para ter acesso a partes que são recusadas, faça o login com username 'admin' e a senha 'admin'. No caso do username 'moderador' e a senha é 'modorador'. Outros usuários as senhas são 123456.
+14- Assim o navegador irá mostrar o Projeto baixado pelo git clone. Lembrando que esse projeto está salvo em: C:/xampp/htdocs/AutomaTIK. Para ter acesso a partes que são recusadas, faça o login com username 'admin' e a senha 'admin'. No caso do username 'moderador' e a senha é 'modorador'. Outros usuários as senhas são 123456.
 
 15- Clica na pasta projeto para ver o site.
 
@@ -102,10 +102,10 @@ Para:
 ```bash	
 	git config --global user.email "you@example.com"
 	git config --global user.name "Your Name"
-	cd C:\xampp\htdocs\AutomaTIK
+	cd C:/xampp/htdocs/AutomaTIK
 	git pull
 ```
-Caso perceba que ocorreu alguma mudança no arquivo automatik.sql (É dito na tela preta do git), faça a atualização do banco de dados do seu computador: abra o Navegador (GoogleChrome, Mozilla,...) e  escreva: localhost/phpmyadmin/, e vai em cima da tela e aperta Base de Dados, depois seleciona "automatik" e aperta "Elimina" e depois em "OK". Logo, no canto esquerdo da tela  aperta em "New" e em "Criar base de Dados" escreva "automatik". Depois vai na aba importar e aperte "Escolher Arquivo", escolha o seguinte arquivo: C:\xampp\htdocs\AutomaTIK\automatik.sql e depois aperta em "Executar". 
+Caso perceba que ocorreu alguma mudança no arquivo automatik.sql (É dito na tela preta do git), faça a atualização do banco de dados do seu computador: abra o Navegador (GoogleChrome, Mozilla,...) e  escreva: localhost/phpmyadmin/, e vai em cima da tela e aperta Base de Dados, depois seleciona "automatik" e aperta "Elimina" e depois em "OK". Logo, no canto esquerdo da tela  aperta em "New" e em "Criar base de Dados" escreva "automatik". Depois vai na aba importar e aperte "Escolher Arquivo", escolha o seguinte arquivo: C:/xampp/htdocs/AutomaTIK/automatik.sql e depois aperta em "Executar". 
 
 
 17 - Qualquer modificação você deve fazer o seguinte, abrir o git e fazer os seguintes comandos, onde você coloca o seu e-mail no "you@example.com", o seu nome em "Your Name" e algum comentário em  "Algum Comentario":
@@ -113,10 +113,10 @@ Caso perceba que ocorreu alguma mudança no arquivo automatik.sql (É dito na te
 ```bash	
 	git config --global user.email "you@example.com"
 	git config --global user.name "Your Name"
-	cd C:\xampp\htdocs\AutomaTIK
+	cd C:/xampp/htdocs/AutomaTIK
 	git add .
 	git commit -m "Algum Comentario"
 	git push
 ```
 
-Onde irá atualizar o código do github. Atualiza sempre o beckup do banco de dados que está presente no arquivo C:\xampp\htdocs\AutomaTIK\automatik.sql. Para fazer o beckup é só digitar localhost/phpmyadmin/ no navegador, apertar no Menu do lado esquerdo em "automatik", aperta depois em "exportar" e depois em executar. O arquivo que foi feito o download sobreescreve sobre o arquivo C:\xampp\htdocs\AutomaTIK\automatik.sql.
+Onde irá atualizar o código do github. Atualiza sempre o beckup do banco de dados que está presente no arquivo C:/xampp/htdocs/AutomaTIK/automatik.sql. Para fazer o beckup é só digitar localhost/phpmyadmin/ no navegador, apertar no Menu do lado esquerdo em "automatik", aperta depois em "exportar" e depois em executar. O arquivo que foi feito o download sobreescreve sobre o arquivo C:/xampp/htdocs/AutomaTIK/automatik.sql.
