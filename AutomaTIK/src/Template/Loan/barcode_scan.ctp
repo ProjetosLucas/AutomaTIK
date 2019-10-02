@@ -41,13 +41,6 @@
 <div class="loan form large-9 medium-8 columns content">
         <section class="container" id="demo-content">
             <h1 class="title">Scan barcode from Video Camera</h1>
-
-            <p>
-                This example shows how to scan a barcode with ZXing javascript library from the device video camera. If more
-                than one video input devices are available (for example front and back camera) the example shows how to read
-                them and use a select to change the input device.
-            </p>
-
             <div>
                 <a class="button" id="startButton">Start</a>
                 <a class="button" id="resetButton">Reset</a>
@@ -65,16 +58,7 @@
 
             <label>Result:</label>
             <pre><code id="result"></code></pre>
-
-            <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/barcode-camera/">source code</a>  for this example.</p>
-
         </section>
-
-        <footer class="footer">
-            <section class="container">
-                <p>ZXing TypeScript Demo. Licensed under the <a target="_blank" href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
-            </section>
-        </footer>
 
   </div>
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
