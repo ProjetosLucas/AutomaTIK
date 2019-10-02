@@ -40,6 +40,7 @@
 </nav>
 <div class="loan form large-9 medium-8 columns content">
         <h1 class="title">Scan Barcode From Student ID</h1>
+        <p id="demo"></p>
             <div>
                 <a class="button" id="startButton" onclick="Start()">Start</a>
                 <a class="button" id="resetButton" onclick="Reset()">Reset</a>
@@ -61,6 +62,7 @@
         </section>
 
         <h1 class="title">Scan barcode from Equipament</h1>
+        <p id="demo1"></p>
         <div>
                 <a class="button" id="startButton1" onclick="Start1()">Start</a>
                 <a class="button" id="resetButton1" onclick="Reset1()">Reset</a>
@@ -115,6 +117,7 @@
                         codeReader.decodeOnceFromVideoDevice(selectedDeviceId, 'video').then((result) => {
                             console.log(result)
                             document.getElementById('result').textContent = result.text
+                            window_text(result.text)
                         }).catch((err) => {
                             console.error(err)
                             document.getElementById('result').textContent = err
@@ -144,6 +147,19 @@
       x.style.display = "none";
     }
     </script>
+    <script>
+function window_text(text) {
+  var txt;
+  if (confirm("Insert the code "+text+"?")) {
+    txt = "The Student code is "+text+".";
+    document.getElementById('resetButton').click();
+  } else {
+    txt = "Not found the Code!";
+    document.getElementById('startButton').click();
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
     <script type="text/javascript">
         window.addEventListener('load', function () {
             let selectedDeviceId;
@@ -173,6 +189,7 @@
                         codeReader.decodeOnceFromVideoDevice(selectedDeviceId, 'video1').then((result) => {
                             console.log(result)
                             document.getElementById('result1').textContent = result.text
+                            window_text1(result.text)
                         }).catch((err) => {
                             console.error(err)
                             document.getElementById('result1').textContent = err
@@ -202,4 +219,17 @@
           x.style.display = "none";
         }
     </script>
+    <script>
+function window_text1(text) {
+  var txt;
+  if (confirm("Insert the code "+text+"?")) {
+    txt = "The Equipament code is "+text+".";
+    document.getElementById('resetButton1').click();
+  } else {
+    txt = "Not found the Code!";
+    document.getElementById('startButton1').click();
+  }
+  document.getElementById("demo1").innerHTML = txt;
+}
+</script>
 
