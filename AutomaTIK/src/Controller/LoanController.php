@@ -298,5 +298,18 @@ ECHO b > COM%NUM%';
     }
 
     public function barcodeScan() {
+        $loan = $this->Loan->newEntity();
+        if ($this->request->is('post')) {
+            $loan = $this->Loan->patchEntity($loan, $this->request->getData());
+            if ($this->Loan->save($loan)) {
+                $this->Flash->success(__('The loan has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The loan could not be saved. Please, try again.'));
+        }
+        $students = $this->Loan->Students->find('list', ['limit' => 200]);
+        $equipaments = $this->Loan->Equipaments->find('list', ['limit' => 200]);
+        $this->set(compact('loan', 'students', 'equipaments'));
     }
 }

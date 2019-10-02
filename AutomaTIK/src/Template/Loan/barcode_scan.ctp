@@ -83,7 +83,16 @@
         </section>
         
 
-
+    <?= $this->Form->create() ?>
+    <fieldset>
+        <legend><?= __('Add Loan') ?></legend>
+        <?php
+            echo $this->Form->control('student_code', ['empty' => true]);
+            echo $this->Form->control('equipament_code', ['empty' => true]);
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
   
 
   </div>
