@@ -39,12 +39,12 @@
         <?php endif; ?>
 </nav>
 <div class="loan form large-9 medium-8 columns content">
-        <section class="container" id="demo-content">
-            <h1 class="title">Scan barcode from Video Camera</h1>
+        <h1 class="title">Scan Barcode From Student ID</h1>
             <div>
-                <a class="button" id="startButton">Start</a>
-                <a class="button" id="resetButton">Reset</a>
+                <a class="button" id="startButton" onclick="Start()">Start</a>
+                <a class="button" id="resetButton" onclick="Reset()">Reset</a>
             </div>
+        <section class="container" id="demo-content" style="display: none;">
 
             <div>
                 <video id="video" width="600" height="400" style="border: 1px solid gray"></video>
@@ -59,6 +59,30 @@
             <label>Result:</label>
             <pre><code id="result"></code></pre>
         </section>
+
+        <h1 class="title">Scan barcode from Equipament</h1>
+        <div>
+                <a class="button" id="startButton1" onclick="Start1()">Start</a>
+                <a class="button" id="resetButton1" onclick="Reset1()">Reset</a>
+        </div>
+        <section class="container" id="demo-content1" style="display: none;">
+            <div>
+                <video id="video1" width="600" height="400" style="border: 1px solid gray"></video>
+            </div>
+
+            <div id="sourceSelectPanel1" style="display:none">
+                <label for="sourceSelect1">Change video source:</label>
+                <select id="sourceSelect1" style="max-width:400px">
+                </select>
+            </div>
+
+            <label>Result:</label>
+            <pre><code id="result1"></code></pre>
+        </section>
+        
+
+
+  
 
   </div>
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
@@ -109,5 +133,73 @@
                     console.error(err)
                 })
         })
+    </script>
+    <script>
+    function Start() {
+      var x = document.getElementById("demo-content");
+      x.style.display = "block";
+    }
+    function Reset() {
+      var x = document.getElementById("demo-content");
+      x.style.display = "none";
+    }
+    </script>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            let selectedDeviceId;
+            const codeReader = new ZXing.BrowserBarcodeReader()
+            console.log('ZXing code reader initialized')
+            codeReader.getVideoInputDevices()
+                .then((videoInputDevices) => {
+                    const sourceSelect = document.getElementById('sourceSelect1')
+                    selectedDeviceId = videoInputDevices[0].deviceId
+                    if (videoInputDevices.length > 1) {
+                        videoInputDevices.forEach((element) => {
+                            const sourceOption = document.createElement('option')
+                            sourceOption.text = element.label
+                            sourceOption.value = element.deviceId
+                            sourceSelect.appendChild(sourceOption)
+                        })
+
+                        sourceSelect.onchange = () => {
+                            selectedDeviceId = sourceSelect.value;
+                        }
+
+                        const sourceSelectPanel = document.getElementById('sourceSelectPanel1')
+                        sourceSelectPanel.style.display = 'block'
+                    }
+
+                    document.getElementById('startButton1').addEventListener('click', () => {
+                        codeReader.decodeOnceFromVideoDevice(selectedDeviceId, 'video1').then((result) => {
+                            console.log(result)
+                            document.getElementById('result1').textContent = result.text
+                        }).catch((err) => {
+                            console.error(err)
+                            document.getElementById('result1').textContent = err
+                        })
+                        console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+                    })
+
+                    document.getElementById('resetButton1').addEventListener('click', () => {
+                        document.getElementById('result1').textContent = '';
+                        codeReader.reset();
+                        console.log('Reset.')
+                    })
+
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        })
+    </script>
+    <script>
+        function Start1() {
+          var x = document.getElementById("demo-content1");
+          x.style.display = "block";
+        }
+        function Reset1() {
+          var x = document.getElementById("demo-content1");
+          x.style.display = "none";
+        }
     </script>
 
