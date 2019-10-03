@@ -298,12 +298,33 @@ ECHO b > COM%NUM%';
     }
 
     public function barcodeScan() {
-        $loan = $this->Loan->newEntity();
+        $time = Time::now();
         if ($this->request->is('post')) {
-            debug($this->request->getData()['student_code']);
-            debug($this->request->getData()['equipament_code']);
-            exit();
-            $loan = $this->Loan->patchEntity($loan, $this->request->getData());
+            $equipaments=$this->loadModel('Equipaments');
+            $students=$this->loadModel('Students');
+            $equipament=$equipaments->find('all')->where(['Equipaments.code' => $this->request->getData()['equipament_code']])->toArray();
+            if($equipament==[]){
+                $this->Flash->error(__('Not found the code of equipament.'));
+                return $this->redirect(['action' => 'barcode-scan']);  
+            }
+            $student=$students->find('all')->where(['Students.code' => $this->request->getData()['student_code']])->toArray();
+            if($student==[]){
+                $this->Flash->error(__('Not found the code of student.'));
+                return $this->redirect(['action' => 'barcode-scan']);    
+            }
+            $time2 = Time::now();
+            $time2->modify('+2 hours');
+            $loan = $this->Loan->newEntity([
+                'student_id' => $student[0]->id,
+                'equipament_id' => $equipament[0]->id,
+                'created' => $time->format('Y-m-d H:i:s'),
+                'modified' => $time->format('Y-m-d H:i:s'),
+                'scheduled_devolution' =>  $time2->format('Y-m-d H:i:s'),
+                'real_devolution' => '',
+                'real_borrow' => $time->format('Y-m-d H:i:s'),
+                'scheduled_borrow' => $time->format('Y-m-d H:i:s')
+            ]);
+            debug($loan);
             if ($this->Loan->save($loan)) {
                 $this->Flash->success(__('The loan has been saved.'));
 
@@ -311,8 +332,5 @@ ECHO b > COM%NUM%';
             }
             $this->Flash->error(__('The loan could not be saved. Please, try again.'));
         }
-        $students = $this->Loan->Students->find('list', ['limit' => 200]);
-        $equipaments = $this->Loan->Equipaments->find('list', ['limit' => 200]);
-        $this->set(compact('loan', 'students', 'equipaments'));
     }
 }
