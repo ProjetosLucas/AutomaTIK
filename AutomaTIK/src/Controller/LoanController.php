@@ -300,7 +300,8 @@ ECHO b > COM%NUM%';
     public function barcodeScan() {
         $loan = $this->Loan->newEntity();
         if ($this->request->is('post')) {
-            debug($this->request->getData());
+            debug($this->request->getData()['student_code']);
+            debug($this->request->getData()['equipament_code']);
             exit();
             $loan = $this->Loan->patchEntity($loan, $this->request->getData());
             if ($this->Loan->save($loan)) {
