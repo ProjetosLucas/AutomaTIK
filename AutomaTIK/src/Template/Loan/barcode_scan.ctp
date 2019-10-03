@@ -162,6 +162,7 @@ function window_text(text) {
   if (confirm("Insert the code "+text+"?")) {
     txt = "The Student code is "+text+".";
     document.getElementById('resetButton').click();
+    document.getElementById("student-code").value = text;
   } else {
     txt = "Not found the Code!";
     document.getElementById('startButton').click();
@@ -234,6 +235,7 @@ function window_text1(text) {
   if (confirm("Insert the code "+text+"?")) {
     txt = "The Equipament code is "+text+".";
     document.getElementById('resetButton1').click();
+    document.getElementById("equipament-code").value = text;
   } else {
     txt = "Not found the Code!";
     document.getElementById('startButton1').click();
