@@ -73,30 +73,30 @@ class StudentsTable extends Table
             ->scalar('cpf')
             ->maxLength('cpf', 100)
             ->requirePresence('cpf', 'create')
-            ->allowEmptyString('cpf', false);
+            ->allowEmptyString('cpf', true);
 
         $validator
             ->scalar('fone')
             ->maxLength('fone', 100)
             ->requirePresence('fone', 'create')
-            ->allowEmptyString('fone', false);
+            ->allowEmptyString('fone', true);
 
         $validator
             ->scalar('name')
             ->maxLength('name', 200)
             ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
+            ->allowEmptyString('name', true);
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->allowEmptyString('email', false);
+            ->allowEmptyString('email', true);
 
         $validator
             ->scalar('registration')
             ->maxLength('registration', 100)
             ->requirePresence('registration', 'create')
-            ->allowEmptyString('registration', false);
+            ->allowEmptyString('registration', true);
 
         return $validator;
     }
