@@ -68,7 +68,7 @@ class EquipamentsTable extends Table
         $validator
             ->scalar('description')
             ->requirePresence('description', 'create')
-            ->allowEmptyString('description', false);
+            ->allowEmptyString('description', true);
 
         $validator
             ->boolean('in_stock')

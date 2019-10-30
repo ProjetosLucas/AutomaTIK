@@ -302,15 +302,52 @@ ECHO b > COM%NUM%';
         if ($this->request->is('post')) {
             $equipaments=$this->loadModel('Equipaments');
             $students=$this->loadModel('Students');
+            if($this->request->getData()['equipament_code']==''){
+                    $this->Flash->error(__('The code of equipament is empty'));
+                    return $this->redirect(['action' => 'barcode-scan']);
+            }
+            if($this->request->getData()['student_code']==''){
+                    $this->Flash->error(__('The code of student is empty'));
+                    return $this->redirect(['action' => 'barcode-scan']);
+            }
             $equipament=$equipaments->find('all')->where(['Equipaments.code' => $this->request->getData()['equipament_code']])->toArray();
             if($equipament==[]){
-                $this->Flash->error(__('Not found the code of equipament.'));
-                return $this->redirect(['action' => 'barcode-scan']);  
+                $aux_variable = [
+                    'name' => 'Untitle',
+                    'code' => $this->request->getData()['equipament_code'],
+                    'description' => '',
+                    'in_stock' => '0'
+                ];
+                $equipament[0] = $equipaments->newEntity();
+                $equipament[0] = $equipaments->patchEntity($equipament[0], $aux_variable);
+                    if ($equipaments->save($equipament[0])) {
+                        $this->Flash->success(__('Not found the code of equipament but the equipament has been saved.'));
+                    }else{
+                        $this->Flash->error(__('Not found the code of equipament and The equipament could not be saved. Please, try again.'));    
+                    }  
             }
             $student=$students->find('all')->where(['Students.code' => $this->request->getData()['student_code']])->toArray();
             if($student==[]){
-                $this->Flash->error(__('Not found the code of student.'));
-                return $this->redirect(['action' => 'barcode-scan']);    
+                $id_novo= (($students->find('all',array('order'=>'id DESC'))->first()->id))+1;
+                $student_aux = [
+                    'code' => $this->request->getData()['student_code'],
+                    'cpf' => '',
+                    'sector_id' => '1',
+                    'fone' => '',
+                    'name' => 'Uname',
+                    'email' => 'uname'.$id_novo.'@uname.com',
+                    'registration' => '',
+                    'user_id' => '1'
+                ];
+                $student[0] = $students->newEntity();
+                $student[0] = $students->patchEntity($student[0], $student_aux);
+                if ($students->save($student[0])) {
+                    $this->Flash->success(__('Not found the code of student but the student has been saved.'));
+
+                }else{
+                    $this->Flash->error(__('The student could not be saved. Please, try again.'));    
+                    return $this->redirect(['action' => 'barcode-scan']);
+                }   
             }
             $time2 = Time::now();
             $time2->modify('+2 hours');
@@ -324,11 +361,10 @@ ECHO b > COM%NUM%';
                 'real_borrow' => $time->format('Y-m-d H:i:s'),
                 'scheduled_borrow' => $time->format('Y-m-d H:i:s')
             ]);
-            debug($loan);
             if ($this->Loan->save($loan)) {
                 $this->Flash->success(__('The loan has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'barcode-scan']);
             }
             $this->Flash->error(__('The loan could not be saved. Please, try again.'));
         }
