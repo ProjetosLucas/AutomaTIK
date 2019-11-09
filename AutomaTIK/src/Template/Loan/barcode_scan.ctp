@@ -49,7 +49,7 @@
         <section class="container" id="demo-content" style="display: none;">
 
             <div>
-                <video id="video" width="600" height="400" style="border: 1px solid gray"></video>
+                <video id="video" width="100%" height="100%" style="border: 1px solid gray"></video>
             </div>
 
             <div id="sourceSelectPanel" style="display:none">
@@ -70,7 +70,7 @@
         </div>
         <section class="container" id="demo-content1" style="display: none;">
             <div>
-                <video id="video1" width="600" height="400" style="border: 1px solid gray"></video>
+                <video id="video1" width="100%" height="100%" style="border: 1px solid gray"></video>
             </div>
 
             <div id="sourceSelectPanel1" style="display:none">

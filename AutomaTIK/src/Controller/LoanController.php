@@ -313,7 +313,7 @@ ECHO b > COM%NUM%';
             $equipament=$equipaments->find('all')->where(['Equipaments.code' => $this->request->getData()['equipament_code']])->toArray();
             if($equipament==[]){
                 $aux_variable = [
-                    'name' => 'Untitle',
+                    'name' => $this->request->getData()['equipament_code'],
                     'code' => $this->request->getData()['equipament_code'],
                     'description' => '',
                     'in_stock' => '0'
@@ -334,7 +334,7 @@ ECHO b > COM%NUM%';
                     'cpf' => '',
                     'sector_id' => '1',
                     'fone' => '',
-                    'name' => 'Uname',
+                    'name' => $this->request->getData()['student_code'],
                     'email' => 'uname'.$id_novo.'@uname.com',
                     'registration' => '',
                     'user_id' => '1'
