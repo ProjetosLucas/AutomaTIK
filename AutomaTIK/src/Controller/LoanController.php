@@ -296,7 +296,11 @@ ECHO b > COM%NUM%';
         $this->response->file($file->path, ['download' => true]);
         return $this->response;
     }
-
+    public function search() {
+        $studentsTable = TableRegistry::get('Students');
+        $students = $studentsTable->find('all')->toArray(); ;
+        $this->set('students', $students);
+    }
     public function barcodeScan() {
         $time = Time::now();
         if ($this->request->is('post')) {
