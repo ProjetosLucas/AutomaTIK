@@ -21,7 +21,7 @@
   <div class="container">
     <div id="async-buttons"></div><br>
     <div id="buttons"></div><br>
-    <input id="input" autofocus style="width:300px" placeholder="ue4_filenames" />
+    <input id="input" autofocus style="width:300px" placeholder="name" />
     <div id="results"></div>
   </div>
 </div>
@@ -632,7 +632,15 @@ return fuzzysortNew()
 // TODO: (performance) i have no idea how well optizmied the allowing typos algorithm is
 
 </script>
-
+<!-- <?php foreach ($students as $student): ?>
+                <td><?= h($student->id) ?></td>
+                <td><?= h($student->code) ?></td>
+                <td><?= h($student->cpf) ?></td>
+                <td><?= h($student->fone) ?></td>
+                <td><?= h($student->name) ?></td>
+                <td><?= h($student->email) ?></td>
+                <td><?= h($student->registration) ?></td><br>
+            <?php endforeach; ?> -->
 <?php
 $numItems = count($students);
 $i = 0;?>
@@ -966,24 +974,24 @@ function bench() {
   const suite = new Benchmark.Suite
 
   suite.add('go prepared', function() {
-    fuzzysort.go('nnnne', testdata_prepared.ue4_filenames)
-    fuzzysort.go('e', testdata_prepared.ue4_filenames)
-    fuzzysort.go('mrender.h', testdata_prepared.ue4_filenames)
+    fuzzysort.go('nnnne', testdata_prepared.name)
+    fuzzysort.go('e', testdata_prepared.name)
+    fuzzysort.go('mrender.h', testdata_prepared.name)
   })
   suite.add('go key', function() {
-    fuzzysort.go('nnnne', testdata_obj.ue4_filenames, {key: 'str'})
-    fuzzysort.go('e', testdata_obj.ue4_filenames, {key: 'str'})
-    fuzzysort.go('mrender.h', testdata_obj.ue4_filenames, {key: 'str'})
+    fuzzysort.go('nnnne', testdata_obj.name, {key: 'str'})
+    fuzzysort.go('e', testdata_obj.name, {key: 'str'})
+    fuzzysort.go('mrender.h', testdata_obj.name, {key: 'str'})
   })
   suite.add('go keys', function() {
-    fuzzysort.go('nnnne', testdata_obj.ue4_filenames, {keys: ['str']})
-    fuzzysort.go('e', testdata_obj.ue4_filenames, {keys: ['str']})
-    fuzzysort.go('mrender.h', testdata_obj.ue4_filenames, {keys: ['str']})
+    fuzzysort.go('nnnne', testdata_obj.name, {keys: ['str']})
+    fuzzysort.go('e', testdata_obj.name, {keys: ['str']})
+    fuzzysort.go('mrender.h', testdata_obj.name, {keys: ['str']})
   })
   suite.add('go str', function() {
-    fuzzysort.go('nnnne', testdata.ue4_filenames)
-    fuzzysort.go('e', testdata.ue4_filenames)
-    fuzzysort.go('mrender.h', testdata.ue4_filenames)
+    fuzzysort.go('nnnne', testdata.name)
+    fuzzysort.go('e', testdata.name)
+    fuzzysort.go('mrender.h', testdata.name)
   })
 
   // suite.add('goKey', function() {
@@ -1006,13 +1014,13 @@ function bench() {
 
   suite.add('goAsync', function(deferred) {
     var count = 0
-    fuzzysort.goAsync('e', testdata_prepared.ue4_filenames).then(()=>{count+=1; if(count===3)deferred.resolve()})
-    fuzzysort.goAsync('a', testdata_prepared.ue4_filenames).then(()=>{count+=1; if(count===3)deferred.resolve()})
-    fuzzysort.goAsync('mrender.h', testdata_prepared.ue4_filenames).then(()=>{count+=1; if(count===3)deferred.resolve()})
+    fuzzysort.goAsync('e', testdata_prepared.name).then(()=>{count+=1; if(count===3)deferred.resolve()})
+    fuzzysort.goAsync('a', testdata_prepared.name).then(()=>{count+=1; if(count===3)deferred.resolve()})
+    fuzzysort.goAsync('mrender.h', testdata_prepared.name).then(()=>{count+=1; if(count===3)deferred.resolve()})
   }, {defer:true})
 
   // suite.add('goAsync.cancel()', function(deferred) {
-  //   const p = fuzzysort.goAsync('e', testdata_prepared.ue4_filenames)
+  //   const p = fuzzysort.goAsync('e', testdata_prepared.name)
   //   p.then(()=>{deferred.resolve()}, ()=>{deferred.resolve()})
   //   p.cancel()
   // }, {defer:true})
@@ -1155,13 +1163,19 @@ function assertResultIntegrity(result) {
 // seededRand.seed = 0
 
 </script>
-
+<script>
+function  InsertCodeByName(aux){
+  console.log(testdata.name.indexOf(aux));
+  index =testdata.name.indexOf(aux);
+  console.log(testdata.registration[index]);
+}
+</script>
 <script>
   ;(function() {
     const $input = $('#input')
     const $results = $('#results')
     const testdatakeys = Object.keys(testdata_prepared)
-    var testdatakey = 'ue4_filenames'
+    var testdatakey = 'name'
     var searchMode = 'Ludicrous Mode'
     var cache = {}
     const cacheChars = 'abcdefghijklmnopqrstuvwxyz'
@@ -1232,7 +1246,7 @@ function assertResultIntegrity(result) {
       var html = '<ul>'
       for (var i = 0; i < results.length; i++) {
         const result = results[i]
-        html += `<li>${result.score} - ${fuzzysort.highlight(result)}</li>`
+        html += `<li><a onclick="InsertCodeByName('${result.target}')">${result.score} - ${fuzzysort.highlight(result)}</a></li>`
       }
       html += '</ul>'
       return html

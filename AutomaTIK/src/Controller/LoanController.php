@@ -372,5 +372,8 @@ ECHO b > COM%NUM%';
             }
             $this->Flash->error(__('The loan could not be saved. Please, try again.'));
         }
+    $studentsTable = TableRegistry::get('Students');
+        $students = $studentsTable->find('all')->toArray(); ;
+        $this->set('students', $students);
     }
 }
