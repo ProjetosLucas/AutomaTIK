@@ -84,6 +84,8 @@ class LoanController extends AppController
         
 
     }
+    public function zxing()
+    {}
     public function get($id = null)
     {
         $loan = $this->Loan->get($id, [
