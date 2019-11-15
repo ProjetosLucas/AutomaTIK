@@ -1,0 +1,53 @@
+% Ajustar esse \vspace de acordo com o necessário
+\vspace{-42pt}
+% Teste de citação: \cite{DepEngEle}
+% Teste de citação: \cite{SistEmprestimo}
+% Teste de citação: \cite{Laravel}
+% Teste de citação: \cite{Cake}
+% Teste de citação: \cite{Software}
+% Teste de citação: \cite{LandItens}
+% Teste de citação: \cite{SistBib}
+
+O Departamento de Engenharia Elétrica da Ufes possui diversos equipamentos que podem ser utilizados nos laboratórios durante as aulas práticas ou fora aula  para projetos a serem desenvolvidos como trabalho de conclusão do curso (TCC), trabalhos de diversas disciplinas, etc. Estes equipamentos costumam ter um alto custo, portanto, devemos ter muito cuidado com eles. O uso do equipamento é de extrema importância no desenvolvimento acadêmico dos alunos.
+	
+
+Durante as aulas práticas acompanhada por professores no laboratório, há empréstimos de Kits com cabos de osciloscópio e de fonte de alimentação e protoboard. Esse processo de empréstimo de Kits é controlado manualmente. Para adquirir o Kit, o aluno tem que entregar um documento com foto e só será devolvido na devolução do Kit. O funcionário fixa no documento do aluno uma ficha com número referente ao Kit emprestado. Esse processo acaba gerando filas no laboratório e confusão na organização dos documentos dos alunos. 
+
+Ainda não há um controle para equimentos que serão utilizados fora dos laboratórios. Deve ser montando um sistema que auxilie e controle esses empréstimos.  O controle manual normalmente se faz anotando o número de identificação do aluno, número de identificação do equipamento, a data de retirada e posteriormente a data de devolulução. Com esse sistema pode haver problemas com anotações errada dos dados, não dá para gerar e analisar o histórico de equipamentos e também não tem como saber a localização que ele se encontra. 
+
+É presciso fazer um sistema que seja capaz de registrar os equipamentos de forma informatizada e que seja possível saber a sua localização, tirando todos os problemas causados pelo sistema manual. É presciso automatizar.
+
+A automação do empréstimo pode ser feita com um sistema existente, como Aleph, Scobi, Pergamum, entre outros, porém os sistemas costumam ter um alto custo de implementação e alguns casos de hardware, o que aumenta ainda mais o custo.
+
+Trabalho atual tem como ideia  desenvolver de um sistema de baixo custo para automatizar o processo de empréstimo de equipamentos e  Kits presentes no laboratórios da Engenharia Elétrica da Ufes.
+
+
+
+
+
+
+
+
+
+% A partir da problemática apontada na seção de Apresentação e objeto de pesquisa temos que o problema é detalhado nos parágrafos seguintes. 
+% O Laboratório mantém sob sua guarda, um número limitado de equipamentos patrimoniados, que disponibiliza para utilização pelos alunos de diversos curso visando auxiliar as aulas. 
+% Alguns materiais se desgastam pelo o próprio tempo de uso e outros pela falta de cuidado e zelo. Há duas categorias de objetos: LIVRE USO e USO RESTRITO. Na categoria de LIVRE USO organizamos os objetos que podem ser utilizados por todos os estudantes. Na categoria de USO RESTRITO organizamos os objetos que são mais dispendiosos e delicados. O AutomaTIK irá abranger somente os KITs (protoboard e cabos coaxiais para conexão do gerador de sinais e osciloscópio) que são usados durantes as aulas de laboratório. 
+% Com o intuito de normatizar a cessão desses bens e acreditando no uso consciente e responsável deste patrimônio pelos alunos, iremos fazer o AutomaTIK que segue o seguintes procedimento:
+% Primeiramente é necessário adicionar usuários ao banco de dados do sistema. Estas são pessoas que emprestam itens. Também tem que adicionar os itens.
+
+% \section[Cadastramento dos Alunos]{Cadastramento dos Alunos}  
+% Apenas alunos e professores cadastrados no programa de empréstimo estão habilitados a solicitar empréstimo de equipamentos, ficando responsável pelo bem durante o período de empréstimo. O cadastro deve ser feito antes de qualquer empréstimo que o aluno possa fazer, onde será inseridos os dados dos alunos como nome, matrícula e código do cartão RU obtido no sensor RFID. Para realizar o cadastramento, o aluno deverá procurar o responsável pela tarefa (funcionário ou monitor).
+% \section[Da verificação de disponibilidade]{Da verificação de disponibilidade}  
+% O sistema faz uma verificação automática se equipamento está disponível. Assim se estiver disponível e se o aluno estiver cadastrado, poderá validar o empréstimo. 
+% Ao tentar solicitar o empréstimo de um objeto e o mesmo já estiver alugado para outra pessoa, o novo solicitante será informado da condição do bem. Nesse ponto, o usuário pode fazer um pedido reserva de uso, assim quando o objeto estiver disponível o solicitante será notificado com um e-mail sobre a disponibilidade do objeto para seu futuro empréstimo. O novo solicitante tem o prazo de 1 (um) dia útil para que possa pegar o objeto de interesse. Caso o novo solicitante não venha pegar o objeto durante o prazo, sua reserva será cancelada.
+% \section[Da solicitação]{Da solicitação} 
+% Caso se os equipamentos estejam disponíveis e se o aluno ou professor estiver cadastrado, pode ser feita a solicitação do empréstimo na plataforma web com preenchimento de um formulário com os seguintes dados: a aula referida, números de matrícula ou código do cartão do RU (este último recebido pelo sensor RFID), código do equipamento requisitado e data e hora prevista de devolução. O número de matrícula vai ser dado pelo cartão do RU, através do sensor RFID. Também terá o campo de observações onde o usuário pode descrever possíveis anormalidades, como fios soltos, conexões errôneas, etc. dos equipamentos.
+% \section[Da retirada do equipamento]{Da retirada do equipamento} 
+% O próprio sistema irá informar se está autorizada a retirada do equipamento. Não autoriza-se caso o usuário está com algum equipamento pendente ou este veio com problemas.
+% \section[Do transporte]{Do transporte} 
+% A forma e o meio de retirada e de transporte para o local de utilização desses equipamentos são de responsabilidade do solicitante. 
+% \section[Da devolução do equipamento]{Da devolução do equipamento} 
+% O equipamento deverá ser devolvido à recepção do Laboratório dentro da data e hora agendadas.  Um profissional irá proceder à conferência física do material e irá confirmar no sistema se houve a devolução, adicionando observações de eventuais problemas ou danos ocasionados ao equipamento durante seu empréstimo. Se a devolução proceder sem problemas, o sistema irá mandar um recibo de devolução por e-mail do usuário.
+% Se o material for entregue danificado e possuir fila de espera, os solicitantes em aguardo irão ser informados do ocorrido. 
+% \section[Renovação]{Renovação} 
+% Caso deseje perdurar o prazo do objeto de empréstimo, o solicitante poderá fazer a Renovação. Basta ir no Laboratório e solicitar a renovação. Caso o objeto de empréstimo não possua fila de espera, a renovação poderá ser feita com sucesso. A quantidade máxima de renovação de um objeto é de 5 vezes.
