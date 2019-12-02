@@ -7,6 +7,8 @@ function read-com {
     do {
         $line = $port.ReadLine()
         Write-Host $line # Do stuff here
+        $Parameters = @{text = $line}
+		Invoke-WebRequest -Uri 'http://automatik.000webhostapp.com/AutomaTIK/localizations/add' -Body $Parameters -Method Get
     }
     while ($port.IsOpen)
 }
